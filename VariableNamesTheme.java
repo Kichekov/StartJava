@@ -163,7 +163,6 @@ class VariableNamesTheme {
         String sam = "sam";
         System.out.println("Производитель оперативной памяти: " + sam);
 
-
         // Емкость жесткого диска
         String hddTb = "hddTb";
         System.out.println("Емкость жесткого диска: " + hddTb);
