@@ -1,4 +1,3 @@
-
 class VariableNamesTheme {
     public static void main(String[] args) {
         System.out.println("Блок No. 1: РАЗНЫЕ ПЕРЕМЕННЫЕ");
@@ -35,12 +34,12 @@ class VariableNamesTheme {
         System.out.println("Процент по вкладу = " + depositPercentage);
 
         // переменная хранит символ;
-        char storesOfCharacter = '%';
-        System.out.println("Переменная хранит символ = " + storesOfCharacter);
+        char character = '%';
+        System.out.println("Переменная хранит символ = " + character);
 
         // код ошибки;
-        int errno = 500;
-        System.out.println("Код ошибки = " + errno);
+        int errorCode = 500;
+        System.out.println("Код ошибки = " + errorCode);
 
         // тип сообщения;
         String messageType = "INFO";
@@ -87,12 +86,12 @@ class VariableNamesTheme {
         System.out.println("Окончание диапазона = " + rangeEnd);
 
         // Имя работника месяца;
-        String nameMonthEmployee = "Ivan";
-        System.out.println("Имя работника месяца = " + nameMonthEmployee);
+        String topPerformerOfMonth = "Ivan";
+        System.out.println("Имя работника месяца = " + topPerformerOfMonth);
 
         // Название электронной книги;
-        String nameEbook = "Mu-mu";
-        System.out.println("Название электронной книги = " + nameEbook);
+        String bookTitle = "Mu-mu";
+        System.out.println("Название электронной книги = " + bookTitle);
 
         // Размер;
         String size = "XXL";
@@ -113,8 +112,8 @@ class VariableNamesTheme {
         // Количество чисел в каждой строке;
         int numberQuantityEachString = 4;
         System.out.println("Количество чисел в каждой строке = " + numberQuantityEachString);
-        System.out.println();
 
+        System.out.println();
         System.out.println("Блок No. 2: BOOLEAN-ПЕРЕМЕННЫЕ");
         // Сотни равны?
         boolean equalHundreds = true;
@@ -125,8 +124,8 @@ class VariableNamesTheme {
         System.out.println("Компьютер включен? " + enabledComputer);
 
         // Есть равные цифры?
-        boolean isEqualNumbers = true;
-        System.out.println("Есть равные цифры? " + isEqualNumbers);
+        boolean hasEqualNumbers = true;
+        System.out.println("Есть равные цифры? " + hasEqualNumbers);
 
         // Создано?
         boolean created = false;
@@ -149,31 +148,30 @@ class VariableNamesTheme {
         System.out.println("Электронная почта действительна? " + validEmail);
 
         // Имеются уникальные строки?
-        boolean isUniqueStrings = true;
-        System.out.println("Имеются уникальные строки? " + isUniqueStrings);
+        boolean hasUniqueStrings = true;
+        System.out.println("Имеются уникальные строки? " + hasUniqueStrings);
 
         System.out.println();
-
         System.out.println("Блок No. 3: АББРЕВИАТУРЫ");
         // Старый universally unique identifier
-        String uuidV1 = "uuidV1";
-        System.out.println("Старый universally unique identifier: " + uuidV1);
+        String oldUuid = "123e4567-e89b-12d3-a456-426614174000";
+        System.out.println("Старый universally unique identifier: " + oldUuid);
 
         // Производитель оперативной памяти
-        String sam = "sam";
-        System.out.println("Производитель оперативной памяти: " + sam);
+        String ramBrand = "Samsung";
+        System.out.println("Производитель оперативной памяти: " + ramBrand);
 
         // Емкость жесткого диска
-        String hddTb = "hddTb";
-        System.out.println("Емкость жесткого диска: " + hddTb);
+        int maxStorageTb = 18;
+        System.out.println("Емкость жесткого диска: " + maxStorageTb + " Tb");
 
         // Протокол передачи гипертекста
-        String httpUrlConnection = "httpUrlConnection";
-        System.out.println("Протокол передачи гипертекста: " + httpUrlConnection);
+        String http = "HTTP/1.0";
+        System.out.println("Протокол передачи гипертекста: " + http);
 
         // Сокращенный uniform resource locator
-        String url = "url";
-        System.out.println("Сокращенный uniform resource locator: " + url);
+        String briefUrl = "vk.cc";
+        System.out.println("Сокращенный uniform resource locator: " + briefUrl);
 
         // Новый идентификатор клиента
         String newClientId = "newClientId";
@@ -184,4 +182,3 @@ class VariableNamesTheme {
         System.out.println("American standard code for information interchange: " + ascii);
     }
 }
-
