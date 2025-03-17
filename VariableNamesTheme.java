@@ -90,8 +90,8 @@ class VariableNamesTheme {
         System.out.println("Имя работника месяца = " + topPerformerOfMonth);
 
         // Название электронной книги;
-        String bookTitle = "Mu-mu";
-        System.out.println("Название электронной книги = " + bookTitle);
+        String ebookTitle = "Mu-mu";
+        System.out.println("Название электронной книги = " + ebookTitle);
 
         // Размер;
         String size = "XXL";
@@ -113,8 +113,7 @@ class VariableNamesTheme {
         int numberQuantityEachString = 4;
         System.out.println("Количество чисел в каждой строке = " + numberQuantityEachString);
 
-        System.out.println();
-        System.out.println("Блок No. 2: BOOLEAN-ПЕРЕМЕННЫЕ");
+        System.out.println("\nБлок No. 2: BOOLEAN-ПЕРЕМЕННЫЕ");
         // Сотни равны?
         boolean equalHundreds = true;
         System.out.println("Сотни равны? " + capacity);
@@ -151,8 +150,7 @@ class VariableNamesTheme {
         boolean hasUniqueStrings = true;
         System.out.println("Имеются уникальные строки? " + hasUniqueStrings);
 
-        System.out.println();
-        System.out.println("Блок No. 3: АББРЕВИАТУРЫ");
+        System.out.println("\nБлок No. 3: АББРЕВИАТУРЫ");
         // Старый universally unique identifier
         String oldUuid = "123e4567-e89b-12d3-a456-426614174000";
         System.out.println("Старый universally unique identifier: " + oldUuid);
