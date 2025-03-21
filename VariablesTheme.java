@@ -113,9 +113,9 @@ class VariablesTheme {
         char leftBracket = '(';
         char rightBracket = ')';
         char underline = '_';
-        System.out.println("    " + "" + slash + backslash);
+        System.out.println("    " + slash + backslash);
         System.out.println("   " + slash + "  " + backslash);
-        System.out.println("  " + "" + slash + underline + leftBracket + 
+        System.out.println("  " + slash + underline + leftBracket + 
                 " " + rightBracket + backslash);
         System.out.println(" " + slash + "      " + backslash);
         System.out.println("" + slash + underline + underline + underline +
@@ -145,9 +145,9 @@ class VariablesTheme {
         BigDecimal bookPriceBd = new BigDecimal("235.83");
         BigDecimal basePriceBd = new BigDecimal(String.valueOf(penPriceBd.add(bookPriceBd)));
         BigDecimal discountBd = new BigDecimal("11.0");
-        BigDecimal discountSumBd = new BigDecimal(String.valueOf(basePriceBd.multiply(
-                discountBd.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP))));
-        BigDecimal discountPriceBd = new BigDecimal(String.valueOf(basePriceBd.subtract(discountSumBd)));
+        BigDecimal discountSumBd = basePriceBd.multiply(discountBd.divide(
+                BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP));
+        BigDecimal discountPriceBd = basePriceBd.subtract(discountSumBd);
         System.out.printf("Общая стоимость товаров без скидки: %.2f руб. \n", basePriceBd);
         System.out.printf("Общая сумма скидки: %.2f руб. \n", discountSumBd);
         System.out.printf("Общая стоимость товаров со скидкой: %.2f руб. \n", discountPriceBd);
