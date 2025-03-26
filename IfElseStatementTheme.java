@@ -4,8 +4,8 @@ import java.math.RoundingMode;
 class IfElseStatementTheme {
     public static void main(String[] args) {
         System.out.println("Задача No. 1: ПЕРЕВОД ПСЕВДОКОДА НА ЯЗЫК JAVA");
-        boolean isGenderMale = true;
-        if (!isGenderMale) {
+        boolean isMale = true;
+        if (!isMale) {
             System.out.println("Женский пол");
         } else {
             System.out.println("Мужской пол");
@@ -46,75 +46,70 @@ class IfElseStatementTheme {
         }
 
         System.out.println("\nЗадача No. 3: ПРОВЕРКА ЧИСЛА");
-        int testNamber = 0;
-        if (testNamber != 0) {
-            if (testNamber > 0 && testNamber % 2 == 0) {
-                System.out.println(testNamber + " является положительным и четным");
-            } else if (testNamber < 0 && testNamber % 2 == 0) {
-                System.out.println(testNamber + " является отрицательным и четным");
-            } else if (testNamber > 0 && testNamber % 2 != 0) {
-                System.out.println(testNamber + " является положительным и не четным");
-            } else if (testNamber < 0 && testNamber % 2 != 0) {
-                System.out.println(testNamber + " является отрицательным и не четным");
-            }
+        int testNum = 2;
+        String parity = testNum % 2 == 0 ? "четным" : "нечетным";
+        if (testNum != 0) {
+            if (testNum > 0) {
+                System.out.println(testNum + " является положительным и " + parity);
+            } else if (testNum < 0) {
+                System.out.println(testNum + " является отрицательным и " + parity);
+            } 
         } else {
             System.out.println("ERROR исходное значение равно 0, дальнейший расчет невозможен.");
         }
 
         System.out.println("\nЗадача No. 4: ПОИСК ОДИНАКОВЫХ ЦИФР В ЧИСЛАХ");
-        int firstOperand = 123;
-        int secondOperand = 223;
-        int hundredsOfFirstOperand = firstOperand / 100;
-        int tensOfFirstOperand = firstOperand % 100 / 10;
-        int onesOfFirstOperand = firstOperand % 10;
-        int hundredsOfSecondOperand = secondOperand / 100;
-        int tensOfSecondOperand = secondOperand % 100 / 10;
-        int onesOfSecondOperand = secondOperand % 10;
-        boolean isEqualHundreds = hundredsOfFirstOperand == hundredsOfSecondOperand;
-        boolean isEqualTens = tensOfFirstOperand == tensOfSecondOperand;
-        boolean isEqualones = onesOfFirstOperand == onesOfSecondOperand;
-        if ((hundredsOfFirstOperand == hundredsOfSecondOperand) ||
-                (tensOfFirstOperand == tensOfSecondOperand) ||
-                (onesOfFirstOperand == onesOfSecondOperand)) {
-            System.out.printf("|Разряд  |Число %4d|Число %4d|\n", firstOperand, secondOperand);
+        int firstNum = 123;
+        int secondNum = 223;
+        int hundredsOffirstNum = firstNum / 100;
+        int tensOffirstNum = firstNum % 100 / 10;
+        int onesOffirstNum = firstNum % 10;
+        int hundredsOfsecondNum = secondNum / 100;
+        int tensOfsecondNum = secondNum % 100 / 10;
+        int onesOfsecondNum = secondNum % 10;
+        boolean isEqualHundreds = hundredsOffirstNum == hundredsOfsecondNum;
+        boolean isEqualTens = tensOffirstNum == tensOfsecondNum;
+        boolean isEqualOnes = onesOffirstNum == onesOfsecondNum;
+        if ((hundredsOffirstNum == hundredsOfsecondNum) ||
+                (tensOffirstNum == tensOfsecondNum) ||
+                (onesOffirstNum == onesOfsecondNum)) {
+            System.out.printf("|Разряд  |Число %4d|Число %4d|\n", firstNum, secondNum);
             if (isEqualHundreds) {
                 System.out.printf("|Сотни   |  %4d    |  %4d    |\n",
-                        hundredsOfFirstOperand, hundredsOfSecondOperand);
+                        hundredsOffirstNum, hundredsOfsecondNum);
             }
             if (isEqualTens) {
                 System.out.printf("|Десятки |  %4d    |  %4d    |\n",
-                        tensOfFirstOperand, tensOfSecondOperand);
+                        tensOffirstNum, tensOfsecondNum);
             }
-            if (isEqualones) {
+            if (isEqualOnes) {
                 System.out.printf("|Единицы |  %4d    |  %4d    |\n",
-                        onesOfFirstOperand, onesOfSecondOperand);
+                        onesOffirstNum, onesOfsecondNum);
             }
         } else {
             System.out.println("Отсутствуют совпадения в разрядах исходных чисел");
         }
 
         System.out.println("\nЗадача No. 5: ОПРЕДЕЛЕНИЕ СИМВОЛА ПО ЕГО КОДУ");
-        char initialCharacter = '\u0057';
-        if ((int) initialCharacter > 64 && (int) initialCharacter < 91) {
-            System.out.println(initialCharacter + " - большая буква");
-        } else if ((int) initialCharacter > 96 && (int) initialCharacter < 123) {
-            System.out.println(initialCharacter + " - маленькая буква");
-        } else if ((int) initialCharacter > 47 && (int) initialCharacter < 58) {
-            System.out.println(initialCharacter + " - цифра");
+        char uncknownCharacter = '\u0057';
+        if (uncknownCharacter >= 'A' && uncknownCharacter <= 'Z') {
+            System.out.println(uncknownCharacter + " - большая буква");
+        } else if (uncknownCharacter >= 'a' && uncknownCharacter <= 'z') {
+            System.out.println(uncknownCharacter + " - маленькая буква");
+        } else if (uncknownCharacter >= '1' && uncknownCharacter <= '9') {
+            System.out.println(uncknownCharacter + " - цифра");
         } else {
-            System.out.println(initialCharacter + " - ни буква и ни цифра");
+            System.out.println(uncknownCharacter + " - ни буква и ни цифра");
         }
 
         System.out.println("\nЗадача No. 6: ПОДСЧЕТ НАЧИСЛЕННЫХ БАНКОМ %");
         double depositValue = 321123.59;
-        double interestOfRate = 0;
-        if (depositValue < 10_000) {
+        double interestOfRate = 10;
+        if (depositValue < 100_000) {
             interestOfRate = 5;
-        } else if (depositValue > 100_000 && depositValue < 300_000) {
+        } else if (depositValue >= 100_000 && depositValue <= 300_000) {
             interestOfRate = 7;
-        } else if (depositValue > 30_000) {
-            interestOfRate = 10;
-        }
+        } 
         double interestIncome = depositValue * (interestOfRate / 100.0);
         double totalDepositValue = depositValue + interestIncome;
         System.out.printf("Сумма вклада: %.2f руб." +
@@ -123,36 +118,32 @@ class IfElseStatementTheme {
                  depositValue, interestIncome, totalDepositValue);
 
         System.out.println("\nЗадача No. 7: ОПРЕДЕЛЕНИЕ ОЦЕНКИ ПО ПРЕДМЕТАМ");
-        int pctHistory = 59;
-        int historyAssessment = 0;
-        int pctProgramming = 92;
-        int programmingAssessment = 0;
+        int historyPct = 59;
+        int historyMark = 2;
+        int programmingPct = 92;
+        int programmingMark = 2;
 
-        if (pctHistory <= 60) {
-            historyAssessment = 2;
-        } else if (pctHistory > 60 && pctHistory <= 73) {
-            historyAssessment = 3;
-        } else if (pctHistory > 73 && pctHistory <= 91) {
-            historyAssessment = 4;
-        } else {
-            historyAssessment = 5;
+        if (historyPct > 60 && historyPct <= 73) {
+            historyMark = 3;
+        } else if (historyPct > 73 && historyPct <= 91) {
+            historyMark = 4;
+        } else if (historyPct > 91) {
+            historyMark = 5;
         }
 
-        if (pctProgramming <= 60) {
-            programmingAssessment = 2;
-        } else if (pctProgramming > 60 && pctProgramming <= 73) {
-            programmingAssessment = 3;
-        } else if (pctProgramming > 73 && pctProgramming <= 91) {
-            programmingAssessment = 4;
-        } else {
-            programmingAssessment = 5;
+        if (programmingPct > 60 && programmingPct <= 73) {
+            programmingMark = 3;
+        } else if (programmingPct > 73 && programmingPct <= 91) {
+            programmingMark = 4;
+        } else if (programmingPct > 91) {
+            programmingMark = 5;
         }
 
-        System.out.println("Предмет: История. Оценка по предмету: " + historyAssessment + ".");
-        System.out.println("Предмет: Программирование. Оценка по предмету: " + programmingAssessment + ".");
-        double avgMark = (double) (historyAssessment + programmingAssessment) / 2.0;
+        System.out.println("Предмет: История. Оценка по предмету: " + historyMark + ".");
+        System.out.println("Предмет: Программирование. Оценка по предмету: " + programmingMark + ".");
+        double avgMark = (double) (historyMark + programmingMark) / 2.0;
         System.out.printf("Cредний балл оценок по предметам: %.2f\n", avgMark);
-        double avgPct = (double) (pctProgramming + pctHistory) / 2.0;
+        double avgPct = (double) (programmingPct + historyPct) / 2.0;
         System.out.printf("Cредний %% по предметам: %.2f\n", avgPct);
 
         System.out.println("\nЗадача No. 8: РАСЧЕТ ГОДОВОЙ ПРИБЫЛИ");
@@ -168,15 +159,13 @@ class IfElseStatementTheme {
 
         System.out.println("\nЗадача No. 9: РАСЧЕТ ГОДОВОЙ ПРИБЫЛИ ПРИ ПОМОЩИ BigDecimal");
         BigDecimal depositValueBd = new BigDecimal("321123.59");
-        double percent = 0;
-        if (depositValueBd.compareTo(BigDecimal.valueOf(10000)) < 0) {
+        double percent = 10;
+        if (depositValueBd.compareTo(BigDecimal.valueOf(100000)) < 0) {
             percent = 5;
-        } else if (depositValueBd.compareTo(BigDecimal.valueOf(100000)) > 0 &&
-                depositValueBd.compareTo(BigDecimal.valueOf(300000)) < 0) {
+        } else if (depositValueBd.compareTo(BigDecimal.valueOf(100000)) >= 0 &&
+                depositValueBd.compareTo(BigDecimal.valueOf(300000)) <= 0) {
             percent = 7;
-        } else if (depositValueBd.compareTo(BigDecimal.valueOf(300000)) > 0) {
-            percent = 10;
-        }
+        } 
         BigDecimal interestIncomeBd = depositValueBd.multiply(
                 BigDecimal.valueOf(percent).divide(BigDecimal.valueOf(100)));
         BigDecimal totalDepositValueBd = depositValueBd.add(interestIncomeBd);
