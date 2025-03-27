@@ -47,13 +47,10 @@ class IfElseStatementTheme {
 
         System.out.println("\nЗадача No. 3: ПРОВЕРКА ЧИСЛА");
         int testNum = 2;
-        String parity = testNum % 2 == 0 ? "четным" : "нечетным";
         if (testNum != 0) {
-            if (testNum > 0) {
-                System.out.println(testNum + " является положительным и " + parity);
-            } else if (testNum < 0) {
-                System.out.println(testNum + " является отрицательным и " + parity);
-            } 
+            String parity = testNum % 2 == 0 ? "четным" : "нечетным";
+            String sign = testNum > 0 ? "положительным" : "отрицательным";
+            System.out.println(testNum + " является " + sign + " и " + parity);
         } else {
             System.out.println("ERROR исходное значение равно 0, дальнейший расчет невозможен.");
         }
@@ -61,56 +58,56 @@ class IfElseStatementTheme {
         System.out.println("\nЗадача No. 4: ПОИСК ОДИНАКОВЫХ ЦИФР В ЧИСЛАХ");
         int firstNum = 123;
         int secondNum = 223;
-        int hundredsOffirstNum = firstNum / 100;
-        int tensOffirstNum = firstNum % 100 / 10;
-        int onesOffirstNum = firstNum % 10;
-        int hundredsOfsecondNum = secondNum / 100;
-        int tensOfsecondNum = secondNum % 100 / 10;
-        int onesOfsecondNum = secondNum % 10;
-        boolean isEqualHundreds = hundredsOffirstNum == hundredsOfsecondNum;
-        boolean isEqualTens = tensOffirstNum == tensOfsecondNum;
-        boolean isEqualOnes = onesOffirstNum == onesOfsecondNum;
-        if ((hundredsOffirstNum == hundredsOfsecondNum) ||
-                (tensOffirstNum == tensOfsecondNum) ||
-                (onesOffirstNum == onesOfsecondNum)) {
+        int hundredsOfFirstNum = firstNum / 100;
+        int tensOfFirstNum = firstNum % 100 / 10;
+        int onesOfFirstNum = firstNum % 10;
+        int hundredsOfSecondNum = secondNum / 100;
+        int tensOfSecondNum = secondNum % 100 / 10;
+        int onesOfSecondNum = secondNum % 10;
+        boolean isEqualHundreds = hundredsOfFirstNum == hundredsOfSecondNum;
+        boolean isEqualTens = tensOfFirstNum == tensOfSecondNum;
+        boolean isEqualOnes = onesOfFirstNum == onesOfSecondNum;
+        if ((hundredsOfFirstNum == hundredsOfSecondNum) ||
+                (tensOfFirstNum == tensOfSecondNum) ||
+                (onesOfFirstNum == onesOfSecondNum)) {
             System.out.printf("|Разряд  |Число %4d|Число %4d|\n", firstNum, secondNum);
             if (isEqualHundreds) {
                 System.out.printf("|Сотни   |  %4d    |  %4d    |\n",
-                        hundredsOffirstNum, hundredsOfsecondNum);
+                        hundredsOfFirstNum, hundredsOfSecondNum);
             }
             if (isEqualTens) {
                 System.out.printf("|Десятки |  %4d    |  %4d    |\n",
-                        tensOffirstNum, tensOfsecondNum);
+                        tensOfFirstNum, tensOfSecondNum);
             }
             if (isEqualOnes) {
                 System.out.printf("|Единицы |  %4d    |  %4d    |\n",
-                        onesOffirstNum, onesOfsecondNum);
+                        onesOfFirstNum, onesOfSecondNum);
             }
         } else {
             System.out.println("Отсутствуют совпадения в разрядах исходных чисел");
         }
 
         System.out.println("\nЗадача No. 5: ОПРЕДЕЛЕНИЕ СИМВОЛА ПО ЕГО КОДУ");
-        char uncknownCharacter = '\u0057';
-        if (uncknownCharacter >= 'A' && uncknownCharacter <= 'Z') {
-            System.out.println(uncknownCharacter + " - большая буква");
-        } else if (uncknownCharacter >= 'a' && uncknownCharacter <= 'z') {
-            System.out.println(uncknownCharacter + " - маленькая буква");
-        } else if (uncknownCharacter >= '1' && uncknownCharacter <= '9') {
-            System.out.println(uncknownCharacter + " - цифра");
+        char uncknownChar = '\u0057';
+        if (uncknownChar >= 'A' && uncknownChar <= 'Z') {
+            System.out.println(uncknownChar + " - большая буква");
+        } else if (uncknownChar >= 'a' && uncknownChar <= 'z') {
+            System.out.println(uncknownChar + " - маленькая буква");
+        } else if (uncknownChar >= '1' && uncknownChar <= '9') {
+            System.out.println(uncknownChar + " - цифра");
         } else {
-            System.out.println(uncknownCharacter + " - ни буква и ни цифра");
+            System.out.println(uncknownChar + " - ни буква и ни цифра");
         }
 
         System.out.println("\nЗадача No. 6: ПОДСЧЕТ НАЧИСЛЕННЫХ БАНКОМ %");
         double depositValue = 321123.59;
-        double interestOfRate = 10;
+        double interestRate = 10;
         if (depositValue < 100_000) {
-            interestOfRate = 5;
+            interestRate = 5;
         } else if (depositValue >= 100_000 && depositValue <= 300_000) {
-            interestOfRate = 7;
+            interestRate = 7;
         } 
-        double interestIncome = depositValue * (interestOfRate / 100.0);
+        double interestIncome = depositValue * (interestRate / 100.0);
         double totalDepositValue = depositValue + interestIncome;
         System.out.printf("Сумма вклада: %.2f руб." +
                 "\nСумму начисленного %%: %.2f руб." +
@@ -120,9 +117,6 @@ class IfElseStatementTheme {
         System.out.println("\nЗадача No. 7: ОПРЕДЕЛЕНИЕ ОЦЕНКИ ПО ПРЕДМЕТАМ");
         int historyPct = 59;
         int historyMark = 2;
-        int programmingPct = 92;
-        int programmingMark = 2;
-
         if (historyPct > 60 && historyPct <= 73) {
             historyMark = 3;
         } else if (historyPct > 73 && historyPct <= 91) {
@@ -131,6 +125,8 @@ class IfElseStatementTheme {
             historyMark = 5;
         }
 
+        int programmingPct = 92;
+        int programmingMark = 2;
         if (programmingPct > 60 && programmingPct <= 73) {
             programmingMark = 3;
         } else if (programmingPct > 73 && programmingPct <= 91) {
@@ -180,7 +176,7 @@ class IfElseStatementTheme {
         BigDecimal productionCostBd = new BigDecimal("9001.729");
         BigDecimal yearlyProfitBd = monthlyRevenueBd.subtract(
                 rentBd.add(productionCostBd)).multiply(BigDecimal.valueOf(12));
-        if (yearlyProfitBd.compareTo(BigDecimal.valueOf(0)) != 0) {
+        if (yearlyProfitBd.compareTo(BigDecimal.ZERO) != 0) {
             System.out.printf("Прибыль за год: %+.2f руб.\n", yearlyProfitBd);
         } else {
             System.out.println("Прибыль за год: 0,00 руб.");
