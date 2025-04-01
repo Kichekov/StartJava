@@ -22,10 +22,20 @@ class CyclesTheme {
         int valueB = 5;
         int valueC = -1;
 
-        int min = (valueA < valueB) ? 
-                ((valueA < valueC) ? valueA : valueC) : ((valueB < valueC) ? valueB : valueC);
-        int max = (valueA > valueB) ? 
-                ((valueA > valueC) ? valueA : valueC) : ((valueB > valueC) ? valueB : valueC);
+        int min = valueC;
+        int max = valueC;
+
+        if (valueA < valueB && valueA < valueC) {
+            min = valueA;
+        } else if (valueB < valueA && valueB < valueC) {
+            min = valueB;
+        } 
+
+        if (valueA > valueB && valueA > valueC) {
+            max = valueA;
+        } else if (valueB > valueA && valueB > valueC) {
+            max = valueB;
+        } 
 
         for (int i = max - 1; i > min; i--) {
             System.out.print(i + " ");
@@ -33,21 +43,21 @@ class CyclesTheme {
 
         System.out.println("\n\nЗадача No. 3: ВЫВОД РЕВЕРСИВНОГО ЧИСЛА И СУММЫ ЕГО ЦИФР");
         int initialNumber = 1234;
-        int sumCounter = 0;
+        int sum = 0;
         System.out.print("Исходное число в обратном порядке: ");
         while (initialNumber > 0) {
             int lastNumber = initialNumber % 10;
-            sumCounter += lastNumber;
+            sum += lastNumber;
             System.out.print(lastNumber);
             initialNumber /= 10;
         }
-        System.out.println("\nСумма выделенных цифр: " + sumCounter);
+        System.out.println("\nСумма выделенных цифр: " + sum);
 
         System.out.println("\nЗадача No. 4: ВЫВОД ЧИСЕЛ В НЕСКОЛЬКО СТРОК");
-        int startPoint = 1;
-        int endPoint = 24;
+        leftBorder = 1;
+        rightBorder = 24;
         int count = 0;
-        for (int i = startPoint; i < endPoint; i++) {
+        for (int i = leftBorder; i < rightBorder; i++) {
             if (i % 2 != 0) {
                 System.out.printf("%4d ", i);
                 count++;
