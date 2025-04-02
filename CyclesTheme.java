@@ -22,19 +22,20 @@ class CyclesTheme {
         int valueB = 5;
         int valueC = -1;
 
-        int min = valueC;
-        int max = valueC;
+        int min = valueA;
+        int max = valueA;
 
-        if (valueA < valueB && valueA < valueC) {
-            min = valueA;
-        } else if (valueB < valueA && valueB < valueC) {
+        if (valueB < min) {
             min = valueB;
-        } 
-
-        if (valueA > valueB && valueA > valueC) {
-            max = valueA;
-        } else if (valueB > valueA && valueB > valueC) {
+        }
+        if (valueB > max) {
             max = valueB;
+        }
+        if (valueC < min) {
+            min = valueC;
+        }
+        if (valueC > max) {
+            max = valueC;
         } 
 
         for (int i = max - 1; i > min; i--) {
