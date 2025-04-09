@@ -23,8 +23,15 @@ class Calculator {
         int base = 0;
         int degree = 0;
         if (sign != '^') {
-            firstOperand = setValue(scanner, "первый");
-            secondOperand = setValue(scanner, "второй");
+            try {
+                firstOperand = inputOperand(scanner, "Введите первый операнд: ");
+                isValid(firstOperand);
+                secondOperand = inputOperand(scanner, "Введите второй операнд: ");
+                isValid(secondOperand);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
             if (sign == '+') {
                 result = firstOperand + secondOperand;
             } else if (sign == '-') {
@@ -37,8 +44,15 @@ class Calculator {
                 result = firstOperand % secondOperand;
             }
         } else {
-            base = setDegree(scanner, "Введите основание степени: ");
-            degree = setDegree(scanner, "Введите степень: ");
+            try {
+                base = inputOperand(scanner, "Введите основание степени: ");
+                isValid(base);
+                degree = inputOperand(scanner, "Введите степень: ");
+                isValid(degree);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
             result = base;
             for (int i = 1; i < degree; i++) {
                 result *= base;
@@ -49,35 +63,23 @@ class Calculator {
                 sign != '^' ? secondOperand : degree, result);
     }
 
-    public static int setValue(Scanner scanner, String operandNumber) {
-        System.out.printf("Введите %s операнд: ", operandNumber);
+    private static int inputOperand(Scanner scanner, String msg) {
+        System.out.printf("%s", msg);
         int operand = 0;
         if (scanner.hasNextInt()) {
             operand = scanner.nextInt();
             if (operand < 1) {
-                System.out.println("Ошибка: Операнд не является натуральным числом");
-                System.exit(1); ;
+                return 0;
             }
         } else {
-            System.out.println("Ошибка: Операнд не является натуральным числом");
-            System.exit(1); ;
+            return 0;
         }
         return operand;
     }
 
-    public static int setDegree(Scanner scanner, String operandNumber) {
-        System.out.printf("%s", operandNumber);
-        int operand = 0;
-        if (scanner.hasNextInt()) {
-            operand = scanner.nextInt();
-            if (operand < 1) {
-                System.out.println("Ошибка: Операнд не является натуральным числом");
-                System.exit(1); ;
-            }
-        } else {
-            System.out.println("Ошибка: Операнд не является натуральным числом");
-            System.exit(1); ;
+    public static void isValid(int operand) throws IllegalArgumentException {
+        if (operand == 0) {
+            throw new IllegalArgumentException("Ошибка: Операнд не является натуральным числом");
         }
-        return operand;
     }
 }
