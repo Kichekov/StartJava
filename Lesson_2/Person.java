@@ -17,7 +17,7 @@ class Person {
         System.out.println("Я иду");
     }
 
-    public void sitDown() {
+    public void sit() {
         System.out.println("Я сижу");
     }
 
