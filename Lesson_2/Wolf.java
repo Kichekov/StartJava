@@ -1,11 +1,11 @@
 public class Wolf {
+    private String wellKnownFact;
     private String gender;
     private String name;
     private int weight;
     private int age;
     private String color;
-    private String wellKnownFact;
-
+    
     public Wolf() {
     }
 
@@ -89,11 +89,12 @@ public class Wolf {
         System.out.println(name + " спит.");
     }
 
-    public void print() {
-        System.out.print("""
+    @Override
+    public String toString() {
+        return """
             Пол волка: %s.
             Имя волка: %s.
-            Вес волка: "%s кг.
+            Вес волка: %s кг.
             Возраст волка: %s года.
             Окрас волка: %s
             Интересный факт: %s
@@ -103,6 +104,6 @@ public class Wolf {
                     weight, 
                     age, 
                     color, 
-                    wellKnownFact));
+                    wellKnownFact);
     }
 }

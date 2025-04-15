@@ -33,7 +33,7 @@ public class WolfTest {
             но благодаря харизматичному голосу Джастина Лонга роль была расширена,
             сделав Альфу одним из ключевых героев истории."""
         );
-        alfa.print();
+        System.out.println(alfa);
 
         alfa.howl();
         alfa.sit();
