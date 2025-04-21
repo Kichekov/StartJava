@@ -18,7 +18,6 @@ class CalculatorTest {
                 expression.setSecondOperand(secondOperand); 
 
                 System.out.println(expression);
-
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 scanner.nextLine();

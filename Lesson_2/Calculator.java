@@ -36,7 +36,7 @@ public class Calculator {
         }
     }
 
-        @Override
+    @Override
     public String toString() {
         Object result;
         if (sign == '^' && secondOperand < 0) {
