@@ -5,9 +5,6 @@ public class Calculator {
     private int secondOperand;
     private char sign;
 
-    public Calculator() {
-    }
-
     public int getFirstOperand() {
         return firstOperand;
     }
@@ -28,65 +25,57 @@ public class Calculator {
         return sign;
     }
 
-    public void setSign(char sign) throws IllegalArgumentException {
+    public void setSign(char sign) {
         switch (sign) {
             case '+', '-', '*', '/', '^', '%':
                 this.sign = sign;
                 break;
             default:
-                throw new IllegalArgumentException("Ошибка: операция " + sign + " не поддерживается");
+                throw new IllegalArgumentException("Ошибка: операция " + sign + 
+                    " не поддерживается");
         }
     }
 
-    public String formatExpressionWithResult() {
-        boolean isNegativeDegree = (sign == '^' && secondOperand < 0);
-        if (!isNegativeDegree) {
-            return String.format("%d %c %d = %d", 
-            getFirstOperand(), 
-            getSign(), 
-            getSecondOperand(), 
-            calculateResult(getFirstOperand(), getSecondOperand()));
+        @Override
+    public String toString() {
+        Object result;
+        if (sign == '^' && secondOperand < 0) {
+            result = 1.0 / calculate(getFirstOperand(), getSecondOperand());
         } else {
-            return String.format("%d %c %d = %f", 
-            getFirstOperand(), 
-            getSign(), 
-            getSecondOperand(), 
-            negativeExponentiate(getFirstOperand(), getSecondOperand()));
+            result = calculate(getFirstOperand(), getSecondOperand());
         }
+
+        return String.format("%d %c %d = %s", 
+        getFirstOperand(), 
+        getSign(), 
+        getSecondOperand(), 
+        result);
     }
 
-    private int calculateResult(int firstOperand, int secondOperand) {
+    private int calculate(int firstOperand, int secondOperand) {
         int result = 0;
-        switch (sign) {
-            case '+' -> result = firstOperand + secondOperand;
-            case '-' -> result = firstOperand - secondOperand;
-            case '*' -> result = firstOperand * secondOperand;
-            case '/' -> result = firstOperand / secondOperand;
-            case '%' -> result = firstOperand % secondOperand;
-            case '^' -> result = positiveExponentiate(firstOperand, secondOperand);
-            default -> result = 0;
-        }
-        return result;
+        return switch (sign) {
+            case '+' -> firstOperand + secondOperand;
+            case '-' -> firstOperand - secondOperand;
+            case '*' -> firstOperand * secondOperand;
+            case '/' -> firstOperand / secondOperand;
+            case '%' -> firstOperand % secondOperand;
+            case '^' -> exponentiate(firstOperand, secondOperand);
+            default -> 0;
+        };
     }
 
-    private int positiveExponentiate(int firstOperand, int secondOperand) {
+    private int exponentiate(int firstOperand, int secondOperand) {
+        if (firstOperand == 0 && secondOperand < 0) {
+            throw new IllegalArgumentException(
+                "Функция возведения в степень нуля не определена" + 
+                " для отрицательных показателей степени");
+        }
         int counter = 1;
-        for (int i = 0; i < secondOperand; i++) {
+        int degreeModul = secondOperand < 0 ? secondOperand * -1 : secondOperand;
+        for (int i = 0; i < degreeModul; i++) {
             counter *= firstOperand;
         }
         return counter;
-    }
-
-    private double negativeExponentiate(int firstOperand, int secondOperand) throws ArithmeticException {
-        if (firstOperand == 0) {
-            throw new ArithmeticException();
-        }
-
-        double counter = 1.0;
-        int degreeModul = -secondOperand;
-        for (int j = 0; j < degreeModul; j++) {
-            counter *= firstOperand;
-        }
-        return 1 / counter;
     }
 }

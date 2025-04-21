@@ -4,7 +4,7 @@ class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Calculator expression = new Calculator();
-        boolean isRunning = true;
+        String result = "";
         do {
             try {
                 int firstOperand = inputOperand(scanner, "Введите первый операнд: ");
@@ -17,36 +17,35 @@ class CalculatorTest {
                 int secondOperand = inputOperand(scanner, "Введите второй операнд: ");
                 expression.setSecondOperand(secondOperand); 
 
-                System.out.println(expression.formatExpressionWithResult());
+                System.out.println(expression);
+
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+                scanner.nextLine();
             } catch (ArithmeticException ex) {
                 System.out.println("Ошибка: деление на ноль запрещено");
+                scanner.nextLine();
             }
 
-            String result = "";
             while (true) {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
                 result = scanner.next();
-                if (result.equals("yes") || result.equals("no")) {
-                    if (result.equals("yes")) {
-                        System.out.println();
-                    } 
+                if (result.equals("yes")) {
+                    System.out.println();
+                    break;
+                }
+                if (result.equals("no")) {
                     break;
                 }
             }
-            isRunning = result.equals("yes");
-        } while (isRunning);
+        } while (result.equals("yes"));
     }
 
-    private static int inputOperand(Scanner scanner, String msg) throws IllegalArgumentException {
+    private static int inputOperand(Scanner scanner, String msg) {
         System.out.printf("%s", msg);
-        int operand = 0;
         if (scanner.hasNextInt()) {
-            operand = scanner.nextInt();
-        } else {
-            throw new IllegalArgumentException("Ошибка: Введенное значение не является целым числом");
+            return scanner.nextInt();
         }
-        return operand;
+        throw new IllegalArgumentException("Ошибка: Введенное значение не является целым числом");
     }
 }
