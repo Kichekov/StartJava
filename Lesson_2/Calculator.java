@@ -5,24 +5,12 @@ public class Calculator {
     private int secondOperand;
     private char sign;
 
-    public int getFirstOperand() {
-        return firstOperand;
-    }
-
     public void setFirstOperand(int firstOperand) {
         this.firstOperand = firstOperand;
     }
 
-    public int getSecondOperand() {
-        return secondOperand;
-    }
-
     public void setSecondOperand(int secondOperand) {
         this.secondOperand = secondOperand;
-    }
-
-    public char getSign() {
-        return sign;
     }
 
     public void setSign(char sign) {
@@ -36,46 +24,45 @@ public class Calculator {
         }
     }
 
-    @Override
-    public String toString() {
-        Object result;
-        if (sign == '^' && secondOperand < 0) {
-            result = 1.0 / calculate(getFirstOperand(), getSecondOperand());
-        } else {
-            result = calculate(getFirstOperand(), getSecondOperand());
-        }
-
-        return String.format("%d %c %d = %s", 
-        getFirstOperand(), 
-        getSign(), 
-        getSecondOperand(), 
-        result);
-    }
-
-    private int calculate(int firstOperand, int secondOperand) {
-        int result = 0;
+    public double calculate() {
         return switch (sign) {
             case '+' -> firstOperand + secondOperand;
             case '-' -> firstOperand - secondOperand;
             case '*' -> firstOperand * secondOperand;
             case '/' -> firstOperand / secondOperand;
             case '%' -> firstOperand % secondOperand;
-            case '^' -> exponentiate(firstOperand, secondOperand);
+            case '^' -> exponentiate();
             default -> 0;
         };
     }
 
-    private int exponentiate(int firstOperand, int secondOperand) {
+    public void printResult(double calculationResult) {
+        if (calculationResult % 1 == 0) {
+            System.out.printf("%d %c %d = %d\n", 
+                    firstOperand, 
+                    sign, 
+                    secondOperand, 
+                    (int) calculationResult);
+        } else {
+            System.out.printf("%d %c %d = %f\n", 
+                    firstOperand, 
+                    sign, 
+                    secondOperand, 
+                    calculationResult);
+        }
+    }
+
+    private double exponentiate() {
         if (firstOperand == 0 && secondOperand < 0) {
             throw new IllegalArgumentException(
                 "Функция возведения в степень нуля не определена" + 
                 " для отрицательных показателей степени");
         }
-        int counter = 1;
-        int degreeModul = secondOperand < 0 ? secondOperand * -1 : secondOperand;
+        int computedValue = 1;
+        int degreeModul = Math.abs(secondOperand);
         for (int i = 0; i < degreeModul; i++) {
-            counter *= firstOperand;
+            computedValue *= firstOperand;
         }
-        return counter;
+        return secondOperand > 0 ? computedValue : 1.0 / computedValue;
     }
 }

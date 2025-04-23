@@ -4,8 +4,11 @@ class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Calculator expression = new Calculator();
-        String result = "";
+        String calculationsRestart = "";
         do {
+            if (calculationsRestart.equals("yes")) {
+                System.out.println();
+            }
             try {
                 int firstOperand = inputOperand(scanner, "Введите первый операнд: ");
                 expression.setFirstOperand(firstOperand);
@@ -17,7 +20,8 @@ class CalculatorTest {
                 int secondOperand = inputOperand(scanner, "Введите второй операнд: ");
                 expression.setSecondOperand(secondOperand); 
 
-                System.out.println(expression);
+                double calculationResult = expression.calculate();
+                expression.printResult(calculationResult);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 scanner.nextLine();
@@ -26,18 +30,12 @@ class CalculatorTest {
                 scanner.nextLine();
             }
 
-            while (true) {
+            calculationsRestart = "";
+            while (!calculationsRestart.equals("yes") && !calculationsRestart.equals("no")) {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-                result = scanner.next();
-                if (result.equals("yes")) {
-                    System.out.println();
-                    break;
-                }
-                if (result.equals("no")) {
-                    break;
-                }
+                calculationsRestart = scanner.next();
             }
-        } while (result.equals("yes"));
+        } while (calculationsRestart.equals("yes"));
     }
 
     private static int inputOperand(Scanner scanner, String msg) {
