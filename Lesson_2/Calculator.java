@@ -9,8 +9,16 @@ public class Calculator {
         this.firstOperand = firstOperand;
     }
 
+    public int getFirstOperand() {
+        return this.firstOperand;
+    }
+
     public void setSecondOperand(int secondOperand) {
         this.secondOperand = secondOperand;
+    }
+
+    public int getSecondOperand() {
+        return this.secondOperand;
     }
 
     public void setSign(char sign) {
@@ -24,6 +32,10 @@ public class Calculator {
         }
     }
 
+    public char getSign() {
+        return this.sign;
+    }
+
     public double calculate() {
         return switch (sign) {
             case '+' -> firstOperand + secondOperand;
@@ -31,38 +43,22 @@ public class Calculator {
             case '*' -> firstOperand * secondOperand;
             case '/' -> firstOperand / secondOperand;
             case '%' -> firstOperand % secondOperand;
-            case '^' -> exponentiate();
+            case '^' -> pow();
             default -> 0;
         };
     }
 
-    public void printResult(double calculationResult) {
-        if (calculationResult % 1 == 0) {
-            System.out.printf("%d %c %d = %d\n", 
-                    firstOperand, 
-                    sign, 
-                    secondOperand, 
-                    (int) calculationResult);
-        } else {
-            System.out.printf("%d %c %d = %f\n", 
-                    firstOperand, 
-                    sign, 
-                    secondOperand, 
-                    calculationResult);
-        }
-    }
-
-    private double exponentiate() {
+    private double pow() {
         if (firstOperand == 0 && secondOperand < 0) {
             throw new IllegalArgumentException(
                 "Функция возведения в степень нуля не определена" + 
                 " для отрицательных показателей степени");
         }
-        int computedValue = 1;
+        int result = 1;
         int degreeModul = Math.abs(secondOperand);
         for (int i = 0; i < degreeModul; i++) {
-            computedValue *= firstOperand;
+            result *= firstOperand;
         }
-        return secondOperand > 0 ? computedValue : 1.0 / computedValue;
+        return secondOperand > 0 ? result : 1.0 / result;
     }
 }
