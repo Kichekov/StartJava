@@ -3,25 +3,25 @@ import java.util.Scanner;
 class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Calculator expression = new Calculator();
-        String continueCalculations = "";
+        Calculator calc = new Calculator();
+        String continueCalculation = "";
         do {
-            if (continueCalculations.equals("yes")) {
+            if (continueCalculation.equals("yes")) {
                 System.out.println();
             }
             try {
                 int firstOperand = inputOperand(scanner, "Введите первый операнд: ");
-                expression.setFirstOperand(firstOperand);
+                calc.setFirstOperand(firstOperand);
 
                 System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
                 char sign = scanner.next().charAt(0);
-                expression.setSign(sign);
+                calc.setSign(sign);
 
                 int secondOperand = inputOperand(scanner, "Введите второй операнд: ");
-                expression.setSecondOperand(secondOperand); 
+                calc.setSecondOperand(secondOperand); 
 
-                double calculationResult = expression.calculate();
-                printResult(expression, calculationResult);
+                double calculationResult = calc.calculate();
+                printResult(calc, calculationResult);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 scanner.nextLine();
@@ -32,25 +32,9 @@ class CalculatorTest {
 
             do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-                continueCalculations = scanner.next();
-            } while (!continueCalculations.equals("yes") && !continueCalculations.equals("no"));
-        } while (continueCalculations.equals("yes"));
-    }
-
-    public static void printResult(Calculator expression, double calculationResult) {
-        if (calculationResult % 1 == 0) {
-            System.out.printf("%d %c %d = %d\n", 
-                    expression.getFirstOperand(), 
-                    expression.getSign(), 
-                    expression.getSecondOperand(), 
-                    (int) calculationResult);
-        } else {
-            System.out.printf("%d %c %d = %f\n", 
-                    expression.getFirstOperand(), 
-                    expression.getSign(), 
-                    expression.getSecondOperand(), 
-                    calculationResult);
-        }
+                continueCalculation = scanner.next();
+            } while (!continueCalculation.equals("yes") && !continueCalculation.equals("no"));
+        } while (continueCalculation.equals("yes"));
     }
 
     private static int inputOperand(Scanner scanner, String msg) {
@@ -59,5 +43,21 @@ class CalculatorTest {
             return scanner.nextInt();
         }
         throw new IllegalArgumentException("Ошибка: Введенное значение не является целым числом");
+    }
+
+    private static void printResult(Calculator calc, double calculationResult) {
+        if (calculationResult % 1 == 0) {
+            System.out.printf("%d %c %d = %d\n", 
+                    calc.getFirstOperand(), 
+                    calc.getSign(), 
+                    calc.getSecondOperand(), 
+                    (int) calculationResult);
+        } else {
+            System.out.printf("%d %c %d = %f\n", 
+                    calc.getFirstOperand(), 
+                    calc.getSign(), 
+                    calc.getSecondOperand(), 
+                    calculationResult);
+        }
     }
 }

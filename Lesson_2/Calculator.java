@@ -10,7 +10,7 @@ public class Calculator {
     }
 
     public int getFirstOperand() {
-        return this.firstOperand;
+        return firstOperand;
     }
 
     public void setSecondOperand(int secondOperand) {
@@ -18,7 +18,7 @@ public class Calculator {
     }
 
     public int getSecondOperand() {
-        return this.secondOperand;
+        return secondOperand;
     }
 
     public void setSign(char sign) {
@@ -33,7 +33,7 @@ public class Calculator {
     }
 
     public char getSign() {
-        return this.sign;
+        return sign;
     }
 
     public double calculate() {
