@@ -23,7 +23,7 @@ class GuessNumberTest {
         GuessNumber game = new GuessNumber(playerOne, playerTwo);
         String continueGame = "";
         do {
-            game.startGame();
+            game.start();
             do {
                 System.out.print("Хотите продолжить игру? [yes/no]: ");
                 continueGame = scanner.next();

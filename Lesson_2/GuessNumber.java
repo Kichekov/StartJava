@@ -3,26 +3,26 @@ import java.util.Scanner;
 public class GuessNumber {
     private Player playerOne;
     private Player playerTwo;
-    private int randomNumber;
+    private int targetNum;
 
     public GuessNumber(Player playerOne, Player playerTwo) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
     }
 
-    public void startGame() {
+    public void start() {
         Scanner scanner = new Scanner(System.in);
         assignRandomNumber();
         boolean hasWinner = false;
         do {
-            playerOne.setNumber(getPlayerInput(playerOne, scanner));
-            if (compareWithRandomNumber(playerOne)) {
+            playerOne.setNumber(inputNumber(playerOne, scanner));
+            if (isGuessed(playerOne)) {
                 hasWinner = true;
                 return;
             }
             scanner.nextLine();
-            playerTwo.setNumber(getPlayerInput(playerTwo, scanner));
-            if (compareWithRandomNumber(playerTwo)) {
+            playerTwo.setNumber(inputNumber(playerTwo, scanner));
+            if (isGuessed(playerTwo)) {
                 hasWinner = true;
                 return;
             }
@@ -30,15 +30,14 @@ public class GuessNumber {
     }
 
     private void assignRandomNumber() {
-        randomNumber = (int) (1 + Math.random() * 100);
+        targetNum = (int) (1 + Math.random() * 100);
     }
 
-    private int getPlayerInput(Player player, Scanner scanner) {
+    private int inputNumber(Player player, Scanner scanner) {
         while (true) {
             System.out.print(player.getName() + " введи число: ");
             try {
-                int playerInput = validatePlayerInput(scanner);
-                return playerInput;
+                return validateEnteredNumber(scanner);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 scanner.nextLine();
@@ -46,30 +45,29 @@ public class GuessNumber {
         }
     }
 
-    private int validatePlayerInput(Scanner scanner) {
+    private int validateEnteredNumber(Scanner scanner) {
         if (!scanner.hasNextInt()) {
             throw new IllegalArgumentException("Ошибка: введенные вами данные" + 
                 " не являются натуральным числом.");
         }
-        int playerNumberInput = scanner.nextInt();
-        if (playerNumberInput < 1 || playerNumberInput > 100) {
+        int enteredNumber = scanner.nextInt();
+        if (enteredNumber < 1 || enteredNumber > 100) {
             throw new IllegalArgumentException("Ошибка: введенное Вами число не принадлежит " + 
                 "заданному отрезку, повторите попытку.");
         } 
-        return playerNumberInput;
+        return enteredNumber;
     }
 
-    private boolean compareWithRandomNumber(Player player) {
-        if (randomNumber != player.getNumber()) {
-            String message = player.getNumber() > randomNumber ? 
+    private boolean isGuessed(Player player) {
+        if (targetNum != player.getNumber()) {
+            String message = player.getNumber() > targetNum ? 
                     "больше" : "меньше";
             System.out.printf("%s %d %s того, что загадал компьютер\n", 
                     player.getName(), player.getNumber(), message);
             return false;
-        } else {
-            System.out.printf("Победа!!! %s угадал число загаданное компьютером\n", player.getName());
-            return true;
-        }
+        } 
+        System.out.printf("Победа!!! %s угадал число загаданное компьютером\n", player.getName());
+        return true;
     }
 }
 
