@@ -1,39 +1,37 @@
 public class CallingMethods {
-    private NonBoolMethods nonBoolMethods;
-    private BoolMethods boolMethods;
+    private MethodsForTest methods;
 
-    public CallingMethods(NonBoolMethods nonBoolMethods, BoolMethods boolMethods) {
-        this.nonBoolMethods = nonBoolMethods;
-        this.boolMethods = boolMethods;
+    public CallingMethods(MethodsForTest methods) {
+        this.methods = methods;
     }
 
     public void printNonBoolMethods() {
-        nonBoolMethods.findLongestWord();
-        nonBoolMethods.chooseMenuItem();
-        nonBoolMethods.calculateAverageGrade();
-        nonBoolMethods.countUniqueWords();
-        nonBoolMethods.showErrorMessage();
-        nonBoolMethods.synchronizeData();
-        nonBoolMethods.restoreBackupData();
-        nonBoolMethods.pauseDownload();
-        nonBoolMethods.restoreDefaultSettings();
-        nonBoolMethods.writeContentToFile();
-        nonBoolMethods.convertCelsiusToFahrenheit();
-        nonBoolMethods.inputMathematicalExpression();
-        nonBoolMethods.identifyWinner();
-        nonBoolMethods.findBooksByAuthorName();
+        methods.findLongestWord();
+        methods.chooseMenuItem();
+        methods.calculateAverageGrade();
+        methods.countUniqueWords();
+        methods.showErrorMessage();
+        methods.synchronizeData();
+        methods.restoreBackupData();
+        methods.pauseDownload();
+        methods.restoreDefaultSettings();
+        methods.writeContentToFile();
+        methods.convertCelsiusToFahrenheit();
+        methods.inputMathematicalExpression();
+        methods.identifyWinner();
+        methods.findBooksByAuthorName();
     }
 
     public void printBoolMethods() {
-        boolMethods.isRunning();
-        boolMethods.isFileRemoved();
-        boolMethods.hasUniqueDigit();
-        boolMethods.isLetterEntered();
-        boolMethods.areNumbersEqual();
-        boolMethods.hasAttempts();
-        boolMethods.isEmpty();
-        boolMethods.isEvenNumber();
-        boolMethods.isPathValid();
-        boolMethods.doesFileExist();
+        methods.isRunning();
+        methods.isFileRemoved();
+        methods.hasUniqueDigit();
+        methods.isLetterEntered();
+        methods.areNumbersEqual();
+        methods.hasAttempts();
+        methods.isEmpty();
+        methods.isEvenNumber();
+        methods.isPathValid();
+        methods.doesFileExist();
     }
 }

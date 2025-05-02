@@ -1,9 +1,8 @@
 class MethodsNameTest {
     public static void main(String[] args) {
-        NonBoolMethods nonBoolMethods = new NonBoolMethods();
-        BoolMethods boolMethods = new BoolMethods();
+        MethodsForTest methods = new MethodsForTest();
 
-        CallingMethods callingMethods = new CallingMethods(nonBoolMethods, boolMethods);
+        CallingMethods callingMethods = new CallingMethods(methods);
 
         System.out.println("HЕ BOOLEAN-МЕТОДЫ");
         callingMethods.printNonBoolMethods();
