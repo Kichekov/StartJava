@@ -3,41 +3,41 @@ public class MethodsNameTest {
         MethodsNameTest testMethodsNaming = new MethodsNameTest();
 
         System.out.println("HЕ BOOLEAN-МЕТОДЫ");
-        testMethodsNaming.printmethods();
+        testMethodsNaming.execNonBoolMethods();
 
         System.out.println("\nBOOLEAN-МЕТОДЫ");
-        testMethodsNaming.printBoolMethods();
+        testMethodsNaming.execBoolMethods();
     }
 
-    public void printBoolMethods() {
-        BoolMethods boolMethodTest = new BoolMethods();
-        System.out.println(boolMethodTest.isRunning());;
-        System.out.println(boolMethodTest.isFileRemoved());
-        System.out.println(boolMethodTest.hasUniqueDigit());
-        System.out.println(boolMethodTest.isLetterEntered());
-        System.out.println(boolMethodTest.areNumbersEqual());
-        System.out.println(boolMethodTest.hasAttempts());
-        System.out.println(boolMethodTest.isEmpty());
-        System.out.println(boolMethodTest.isEvenNumber());
-        System.out.println(boolMethodTest.isPathValid());;
-        System.out.println(boolMethodTest.doesFileExist());
+    private void execBoolMethods() {
+        BoolMethods bm = new BoolMethods();
+        System.out.println(bm.isRunning());;
+        System.out.println(bm.isFileRemoved());
+        System.out.println(bm.hasUniqueDigit());
+        System.out.println(bm.isLetter());
+        System.out.println(bm.hasEqualDigits());
+        System.out.println(bm.hasAttempts());
+        System.out.println(bm.isEmpty());
+        System.out.println(bm.isEvenNumber());
+        System.out.println(bm.isValidPath());;
+        System.out.println(bm.isExistFile());
     }
 
-    public void printmethods() {
-        NonBoolMethods nonBoolMethodTest = new NonBoolMethods();
-        nonBoolMethodTest.findLongestWord();
-        nonBoolMethodTest.chooseMenuItem();
-        nonBoolMethodTest.calculateAverageGrade();
-        nonBoolMethodTest.countUniqueWords();
-        nonBoolMethodTest.showErrorMessage();
-        nonBoolMethodTest.synchronizeData();
-        nonBoolMethodTest.restoreBackupData();
-        nonBoolMethodTest.pauseDownload();
-        nonBoolMethodTest.restoreDefaultSettings();
-        nonBoolMethodTest.writeContentToFile();
-        nonBoolMethodTest.convertCelsiusToFahrenheit();
-        nonBoolMethodTest.inputMathematicalExpression();
-        nonBoolMethodTest.identifyWinner();
-        nonBoolMethodTest.findBooksByAuthorName();
+    private void execNonBoolMethods() {
+        NonBoolMethods nonBm = new NonBoolMethods();
+        nonBm.findLongestWord();
+        nonBm.chooseMenuItem();
+        nonBm.calculateAverageGrade();
+        nonBm.countUniqueWords();
+        nonBm.showErrorMessage();
+        nonBm.synchronizeData();
+        nonBm.restoreBackupData();
+        nonBm.pauseDownload();
+        nonBm.restoreDefaultSettings();
+        nonBm.writeToFile();
+        nonBm.celsiusToFahrenheit();
+        nonBm.inputMathExpression();
+        nonBm.identifyWinner();
+        nonBm.findBookByAuthor();
     }
 }

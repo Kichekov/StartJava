@@ -1,5 +1,5 @@
-public class MethodNameResolver {
-    public static String currentMethodName() {
+public class MethodName {
+    public static String getCurrent() {
         return Thread.currentThread().getStackTrace()[2].getMethodName();
     }
 }
