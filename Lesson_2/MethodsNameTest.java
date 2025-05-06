@@ -1,12 +1,12 @@
 public class MethodsNameTest {
     public static void main(String[] args) {
-        MethodsNameTest testMethodsNaming = new MethodsNameTest();
+        MethodsNameTest mnt = new MethodsNameTest();
 
         System.out.println("HЕ BOOLEAN-МЕТОДЫ");
-        testMethodsNaming.execNonBoolMethods();
+        mnt.execNonBoolMethods();
 
         System.out.println("\nBOOLEAN-МЕТОДЫ");
-        testMethodsNaming.execBoolMethods();
+        mnt.execBoolMethods();
     }
 
     private void execBoolMethods() {
