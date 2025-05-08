@@ -1,3 +1,5 @@
+package com.startjava.lesson_1.base;
+
 class CyclesTheme {
     public static void main(String[] args) {
         System.out.println("Задача No. 1: ПОДСЧЕТ СУММЫ ЧЕТНЫХ И НЕЧЕТНЫХ ЧИСЕЛ");
