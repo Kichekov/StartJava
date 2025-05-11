@@ -2,4 +2,4 @@
 *.xml
 *.jar
 *.txt
-/out/
+out/
