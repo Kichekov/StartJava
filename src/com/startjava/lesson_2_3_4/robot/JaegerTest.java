@@ -1,6 +1,6 @@
 package com.startjava.lesson_2_3_4.robot;
 
-import com.startjava.lesson_2_3.robot.Jaeger;
+import com.startjava.lesson_2_3_4.robot.Jaeger;
 
 public class JaegerTest {
     public static void main(String[] args) {
