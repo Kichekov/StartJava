@@ -2,7 +2,7 @@ package com.startjava.lesson_2_3_4.array;
 
 import java.util.Arrays;
 
-public class TransactionProcessor {
+public class TransactionReverser {
     public static void main(String[] args) {
         int[] original1 = {6, 8, 9, 1};
         int[] reversed1 = reverse(original1);

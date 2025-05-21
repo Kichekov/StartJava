@@ -1,34 +1,32 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class HackerSimulation {
-    private static final char[] SPINNER_SYMBOLS = {'-', '\\', '|', '/'};
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
+    private static final char[] SPINNER = {'-', '\\', '|', '/'};
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
 
     public static void main(String[] args) throws InterruptedException {
-        animateHackingProcess(SPINNER_SYMBOLS);
+        hack();
         int randomNumber = assignRandomNumber();
-        System.out.print(determineOperationResult(randomNumber));
+        printHackResult(randomNumber);
     }
 
-    private static void animateHackingProcess(char[] spinnerSymbols) throws InterruptedException {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j <= spinnerSymbols.length - 1; j++) {
-                System.out.print("\rHacking: " + spinnerSymbols[j]);
-                Thread.sleep(400);
-            }
+    private static void hack() throws InterruptedException {
+        for (int i = 0, totalItem = 13; i < totalItem; i++) {
+            int index = i % 4;
+            char item = SPINNER[index];
+            System.out.print("\rHacking: " + item);
+            Thread.sleep(400);
         }
-        System.out.print("\rHacking: -");
-        Thread.sleep(400);
-        System.out.print("\rHacking: ");
     }
 
     private static int assignRandomNumber() {
         return (int) (Math.random() * 100);
     }
 
-    private static String determineOperationResult(int randomNumber) {
-        return randomNumber > 70 ? ANSI_GREEN + "Access Granted!" : ANSI_RED + "Access Denied!";
+    private static void printHackResult(int randomNumber) {
+        System.out.printf("\rHacking: %s ", randomNumber > 70 ?
+                GREEN + "Access Granted!" : RED + "Access Denied!");
     }
 }
 
