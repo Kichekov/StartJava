@@ -5,25 +5,25 @@ public class ArrayFilterByIndex {
     private static final int ARRAY_SIZE = 15;
 
     public static void main(String[] args) {
-        float[] original1 = generateRandomArray();
+        float[] original = generateRandomArray();
         int index = -1;
-        float[] filtered1 = filterByIndexValue(original1, index);
-        printResult(original1, filtered1, index);
+        float[] filtered = filterByIndexValue(original, index);
+        printResult(original, filtered, index);
 
-        float[] original2 = generateRandomArray();
+        original = generateRandomArray();
         index = 15;
-        float[] filtered2 = filterByIndexValue(original2, index);
-        printResult(original2, filtered2, index);
+        filtered = filterByIndexValue(original, index);
+        printResult(original, filtered, index);
 
-        float[] original3 = generateRandomArray();
+        original = generateRandomArray();
         index = 0;
-        float[] filtered3 = filterByIndexValue(original3, index);
-        printResult(original3, filtered3, index);
+        filtered = filterByIndexValue(original, index);
+        printResult(original, filtered, index);
 
-        float[] original4 = generateRandomArray();
+        original = generateRandomArray();
         index = 14;
-        float[] filtered4 = filterByIndexValue(original4, index);
-        printResult(original4, filtered4, index);
+        filtered = filterByIndexValue(original, index);
+        printResult(original, filtered, index);
     }
 
     private static float[] generateRandomArray() {
@@ -59,19 +59,21 @@ public class ArrayFilterByIndex {
                     """, index, original.length - 1);
             return;
         }
-        System.out.println("Исходный массив:");
-        for (int i = 0; i < original.length; i++) {
-            System.out.printf("%.3f %s", original[i], i == 7 ? "\n" : " ");
-        }
+
+        printArray("Исходный массив:", original);
 
         System.out.printf("\n\nЗначение из ячейки по переданному индексу: = %.3f\n", original[index]);
 
-        System.out.println("\nОткорректированный массив:");
-        for (int i = 0; i < filtered.length; i++) {
-            System.out.printf("%.3f %s", filtered[i], i == 7 ? "\n" : " ");
-        }
+        printArray("Откорректированный массив:", filtered);
 
         System.out.println("\n\nКоличество обнуленных ячеек: " + zeroedCount + "\n");
         zeroedCount = 0;
+    }
+
+    private static void printArray(String msg, float[] array) {
+        System.out.println("\n" + msg);
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("%.3f %s", array[i], i == 7 ? "\n" : " ");
+        }
     }
 }
