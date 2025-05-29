@@ -21,25 +21,9 @@ public class CharTrianglePrinter {
 
         char[] chars = new char[rightBorder - leftBorder + 1];
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = (char) (leftBorder + i);
-        }
-
-        if (!isAscending) {
-            reverse(chars);
+            chars[i] = isAscending ? (char) (leftBorder + i) : (char) (rightBorder - i);
         }
         return chars;
-    }
-
-    private static void reverse(char[] chars) {
-        int left = 0;
-        int right = chars.length - 1;
-        while (left < right) {
-            char temp = chars[left];
-            chars[left] = chars[right];
-            chars[right] = temp;
-            left++;
-            right--;
-        }
     }
 
     private static void printTriangle(char[] chars) {
@@ -49,18 +33,14 @@ public class CharTrianglePrinter {
         int rows = chars.length;
         int triangleWidth = (rows * 2) - 1;
 
+        StringBuilder triangle = new StringBuilder();
         for (int i = 0; i < rows; i++) {
-            char currentChar = chars[i];
             int repeatCount = i * 2 + 1;
             int spacesCount = (triangleWidth - repeatCount) / 2;
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(" ".repeat(spacesCount));
-            sb.append(Character.toString(currentChar).repeat(repeatCount));
-
-            System.out.println(sb);
+            triangle.append(" ".repeat(spacesCount));
+            triangle.append(Character.toString(chars[i]).repeat(repeatCount)).append("\n");
         }
-        System.out.println();
+        System.out.println(triangle);
     }
 }
 
