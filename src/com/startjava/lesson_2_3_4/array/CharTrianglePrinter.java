@@ -2,17 +2,19 @@ package com.startjava.lesson_2_3_4.array;
 
 public class CharTrianglePrinter {
     public static void main(String[] args) {
-        char[] chars = generateCharArray('0', '9', true);
-        printTriangle(chars);
+        StringBuilder triangle;
 
-        chars = generateCharArray('/', '!', false);
-        printTriangle(chars);
+        triangle = buildCharRangeTriangle('0', '9', true);
+        printTriangle(triangle);
 
-        chars = generateCharArray('A', 'J', false);
-        printTriangle(chars);
+        triangle = buildCharRangeTriangle('/', '!', false);
+        printTriangle(triangle);
+
+        triangle = buildCharRangeTriangle('A', 'J', false);
+        printTriangle(triangle);
     }
 
-    private static char[] generateCharArray(char leftBorder, char rightBorder, boolean isAscending) {
+    private static StringBuilder buildCharRangeTriangle(char leftBorder, char rightBorder, boolean isAscending) {
         if (leftBorder > rightBorder) {
             System.out.printf("Ошибка: левая граница (%d) > правой (%d)%n\n",
                     (int) leftBorder, (int) rightBorder);
@@ -21,15 +23,9 @@ public class CharTrianglePrinter {
 
         char[] chars = new char[rightBorder - leftBorder + 1];
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = isAscending ? (char) (leftBorder + i) : (char) (rightBorder - i);
+            chars[i] = (char) (isAscending ? leftBorder++ : rightBorder--);
         }
-        return chars;
-    }
 
-    private static void printTriangle(char[] chars) {
-        if (chars == null) {
-            return;
-        }
         int rows = chars.length;
         int triangleWidth = (rows * 2) - 1;
 
@@ -40,6 +36,14 @@ public class CharTrianglePrinter {
             triangle.append(" ".repeat(spacesCount));
             triangle.append(Character.toString(chars[i]).repeat(repeatCount)).append("\n");
         }
+        return triangle;
+    }
+
+    private static void printTriangle(StringBuilder triangle) {
+        if (triangle == null) {
+            return;
+        }
+
         System.out.println(triangle);
     }
 }
