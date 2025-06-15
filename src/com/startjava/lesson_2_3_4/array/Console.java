@@ -8,7 +8,7 @@ class Console {
     private Console() {
     }
 
-    public static void printResult(float[] original, float[] filtered, int index) {
+    public static void printFilterByIndex(float[] original, float[] filtered, int index) {
         if (index < 0 || index >= original.length) {
             System.out.printf("""
                     Ошибка: индекс %d вне допустимого диапазона. \
@@ -24,8 +24,14 @@ class Console {
 
         printArray("\nОткорректированный массив:", filtered);
 
-        System.out.println("\n\nКоличество обнуленных ячеек: " + Arrays.zeroedCount + "\n");
-        Arrays.zeroedCount = 0;
+        int zeroedCount = 0;
+        for (int i = 0; i < filtered.length; i++) {
+            if (original[i] > original[index]) {
+                zeroedCount++;
+            }
+        }
+
+        System.out.println("\n\nКоличество обнуленных ячеек: " + zeroedCount + "\n");
     }
 
     public static void printArray(String msg, float[] array) {
@@ -37,7 +43,8 @@ class Console {
 
     public static void printTriangle(char leftBorder, char rightBorder, StringBuilder triangle) {
         if (triangle == null) {
-            System.out.printf("Ошибка: левая граница (%d) > правой (%d)\n\n", (int) leftBorder, (int) rightBorder);
+            System.out.printf("Ошибка: левая граница (%d) > правой (%d)\n\n",
+                    (int) leftBorder, (int) rightBorder);
             return;
         }
         System.out.println(triangle);
@@ -72,8 +79,8 @@ class Console {
         System.out.println();
     }
 
-    public static void printHackResult() {
-        System.out.printf("\rHacking: %s%s \n\n", Arrays.randomNumber > 70 ?
+    public static void printHackResult(int randomNumber) {
+        System.out.printf("\rHacking: %s%s \n\n", randomNumber > 70 ?
                 GREEN + "Access Granted!" : RED + "Access Denied!", RESET);
     }
 
@@ -112,7 +119,7 @@ class Console {
         System.out.println("\n");
     }
 
-    public static void printArray(int[] numbers,int startRange, int endRange, int itemsPerLine) {
+    public static void printArray(int[] numbers, int startRange, int endRange, int itemsPerLine) {
         if (startRange > endRange) {
             System.out.printf("Ошибка: левая граница (%d) > правой (%d)\n\n", startRange, endRange);
             return;

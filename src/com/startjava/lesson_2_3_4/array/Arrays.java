@@ -1,18 +1,18 @@
 package com.startjava.lesson_2_3_4.array;
+
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Arrays {
-    public static int zeroedCount;
     public static final int ARRAY_SIZE = 15;
     public static final char[] SPINNER = {'-', '\\', '|', '/'};
-    public static int randomNumber;
 
     private Arrays() {
     }
 
-    public static StringBuilder buildCharRangeTriangle(char leftBorder, char rightBorder, boolean isAscending) {
+    public static StringBuilder buildCharRangeTriangle(char leftBorder, char rightBorder,
+                                                       boolean isAscending) {
         if (leftBorder > rightBorder) {
             return null;
         }
@@ -60,12 +60,10 @@ class Arrays {
             return original;
         }
 
-        zeroedCount = 0;
         float[] filtered = original.clone();
         for (int i = 0; i < original.length; i++) {
             if (filtered[i] > original[index]) {
                 filtered[i] = 0.0F;
-                zeroedCount++;
             }
         }
         return filtered;
@@ -79,13 +77,14 @@ class Arrays {
         return array;
     }
 
-    public static void hack() throws InterruptedException {
-        randomNumber = (int) (Math.random() * 100);
+    public static int hack() throws InterruptedException {
+        int randomNumber = (int) (Math.random() * 100);
         for (int i = 0; i < 13; i++) {
             char item = SPINNER[i % 4];
             System.out.print("\rHacking: " + item);
             Thread.sleep(400);
         }
+        return randomNumber;
     }
 
     public static int[] reverse(int[] transactions) {
