@@ -11,39 +11,31 @@ public class Main {
         runTypewriterEffect();
     }
 
-    private static void runFilterByIndexTask() {
-        float[] original = Arrays.generateRandomArray();
-        int index = -1;
-        float[] filtered = Arrays.filterByIndexValue(original, index);
-        Console.printFilterByIndex(original, filtered, index);
+    public static void runTransactionReverser() {
+        int[] original = {6, 8, 9, 1};
+        int[] reversed = Arrays.reverse(original);
+        Console.printTransactions(original, reversed);
 
-        original = Arrays.generateRandomArray();
-        index = 15;
-        filtered = Arrays.filterByIndexValue(original, index);
-        Console.printFilterByIndex(original, filtered, index);
+        original = new int[]{13, 8, 5, 3, 2, 1, 1};
+        reversed = Arrays.reverse(original);
+        Console.printTransactions(original, reversed);
 
-        original = Arrays.generateRandomArray();
-        index = 0;
-        filtered = Arrays.filterByIndexValue(original, index);
-        Console.printFilterByIndex(original, filtered, index);
+        original = new int[]{5};
+        reversed = Arrays.reverse(original);
+        Console.printTransactions(original, reversed);
 
-        original = Arrays.generateRandomArray();
-        index = 14;
-        filtered = Arrays.filterByIndexValue(original, index);
-        Console.printFilterByIndex(original, filtered, index);
+        original = new int[]{};
+        reversed = Arrays.reverse(original);
+        Console.printTransactions(original, reversed);
+
+        original = null;
+        reversed = Arrays.reverse(original);
+        Console.printTransactions(original, reversed);
     }
 
-    private static void runTrianglePrintTask() {
-        StringBuilder triangle;
-
-        triangle = Arrays.buildCharRangeTriangle('0', '9', true);
-        Console.printTriangle('0', '9', triangle);
-
-        triangle = Arrays.buildCharRangeTriangle('/', '!', false);
-        Console.printTriangle('/', '!', triangle);
-
-        triangle = Arrays.buildCharRangeTriangle('A', 'J', false);
-        Console.printTriangle('A', 'J', triangle);
+    public static void runHackerSimulation() throws InterruptedException {
+        boolean isHack = Arrays.hack();
+        Console.printHackResult(isHack);
     }
 
     private static void runFactorialCalculator() {
@@ -68,31 +60,54 @@ public class Main {
         Console.printFactorialsExpr(numbers, factorials);
     }
 
-    public static void runHackerSimulation() throws InterruptedException {
-        int randomNumber = Arrays.hack();
-        Console.printHackResult(randomNumber);
+    private static void runFilterByIndexTask() {
+        float[] original = Arrays.generateSortedUniqueRandomArray();
+        int index = -1;
+        float[] filtered = Arrays.filterByIndexValue(original, index);
+        Console.printFilterByIndex(original, filtered, index);
+
+        original = Arrays.generateSortedUniqueRandomArray();
+        index = 15;
+        filtered = Arrays.filterByIndexValue(original, index);
+        Console.printFilterByIndex(original, filtered, index);
+
+        original = Arrays.generateSortedUniqueRandomArray();
+        index = 0;
+        filtered = Arrays.filterByIndexValue(original, index);
+        Console.printFilterByIndex(original, filtered, index);
+
+        original = Arrays.generateSortedUniqueRandomArray();
+        index = 14;
+        filtered = Arrays.filterByIndexValue(original, index);
+        Console.printFilterByIndex(original, filtered, index);
     }
 
-    public static void runTransactionReverser() {
-        int[] original = {6, 8, 9, 1};
-        int[] reversed = Arrays.reverse(original);
-        Console.printTransactions(original, reversed);
+    private static void runTrianglePrintTask() {
+        StringBuilder triangle = Arrays.buildCharRangeTriangle('0', '9', true);
+        Console.printTriangle('0', '9', triangle);
 
-        original = new int[]{13, 8, 5, 3, 2, 1, 1};
-        reversed = Arrays.reverse(original);
-        Console.printTransactions(original, reversed);
+        triangle = Arrays.buildCharRangeTriangle('/', '!', false);
+        Console.printTriangle('/', '!', triangle);
 
-        original = new int[]{5};
-        reversed = Arrays.reverse(original);
-        Console.printTransactions(original, reversed);
+        triangle = Arrays.buildCharRangeTriangle('A', 'J', false);
+        Console.printTriangle('A', 'J', triangle);
+    }
 
-        original = new int[]{};
-        reversed = Arrays.reverse(original);
-        Console.printTransactions(original, reversed);
+    public static void runUniqueArraySorter() {
+        int[] numbers = Arrays.generateSortedUniqueRandomArray(-30, -10, 23);
+        Console.printArray(numbers, -30, -10, 23);
 
-        original = null;
-        reversed = Arrays.reverse(original);
-        Console.printTransactions(original, reversed);
+        numbers = Arrays.generateSortedUniqueRandomArray(10, 50, 10);
+        Console.printArray(numbers, 10, 50, 10);
+
+        numbers = Arrays.generateSortedUniqueRandomArray(-34, -34, 0);
+        Console.printArray(numbers, -34, 34, 0);
+
+        numbers = Arrays.generateSortedUniqueRandomArray(-1, 2, -3);
+        Console.printArray(numbers, -1, 2, -3);
+
+        numbers = Arrays.generateSortedUniqueRandomArray(5, -8, 2);
+        Console.printArray(numbers, 5, -8, 2);
     }
 
     public static void runTypewriterEffect() throws InterruptedException {
@@ -109,22 +124,5 @@ public class Main {
 
         modifiedString = Arrays.toUppercaseRange("");
         Console.type(modifiedString);
-    }
-
-    public static void runUniqueArraySorter() {
-        int[] numbers = Arrays.generateRandomArray(-30, -10, 23);
-        Console.printArray(numbers, -30, -10, 23);
-
-        numbers = Arrays.generateRandomArray(10, 50, 10);
-        Console.printArray(numbers, 10, 50, 10);
-
-        numbers = Arrays.generateRandomArray(-34, -34, 0);
-        Console.printArray(numbers, -34, 34, 0);
-
-        numbers = Arrays.generateRandomArray(-1, 2, -3);
-        Console.printArray(numbers, -1, 2, -3);
-
-        numbers = Arrays.generateRandomArray(5, -8, 2);
-        Console.printArray(numbers, 5, -8, 2);
     }
 }

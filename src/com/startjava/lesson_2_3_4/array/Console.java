@@ -79,8 +79,8 @@ class Console {
         System.out.println();
     }
 
-    public static void printHackResult(int randomNumber) {
-        System.out.printf("\rHacking: %s%s \n\n", randomNumber > 70 ?
+    public static void printHackResult(boolean isHack) {
+        System.out.printf("\rHacking: %s%s \n\n", isHack ?
                 GREEN + "Access Granted!" : RED + "Access Denied!", RESET);
     }
 

@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 class Arrays {
     public static final int ARRAY_SIZE = 15;
-    public static final char[] SPINNER = {'-', '\\', '|', '/'};
 
     private Arrays() {
     }
@@ -69,7 +68,7 @@ class Arrays {
         return filtered;
     }
 
-    public static float[] generateRandomArray() {
+    public static float[] generateSortedUniqueRandomArray() {
         float[] array = new float[ARRAY_SIZE];
         for (int i = 0; i < array.length; i++) {
             array[i] = (float) Math.random();
@@ -77,24 +76,30 @@ class Arrays {
         return array;
     }
 
-    public static int hack() throws InterruptedException {
+    public static boolean hack() throws InterruptedException {
+        char[] spinner = {'-', '\\', '|', '/'};
         int randomNumber = (int) (Math.random() * 100);
         for (int i = 0; i < 13; i++) {
-            char item = SPINNER[i % 4];
+            char item = spinner[i % 4];
             System.out.print("\rHacking: " + item);
             Thread.sleep(400);
         }
-        return randomNumber;
+        return randomNumber > 70;
     }
 
-    public static int[] reverse(int[] transactions) {
-        if (transactions == null) {
+    public static int[] reverse(int[] numbers) {
+        if (numbers == null) {
             return null;
         }
-        int[] reversed = new int[transactions.length];
-        int length = transactions.length - 1;
-        for (int transaction : transactions) {
-            reversed[length--] = transaction;
+
+        if (numbers.length == 0) {
+            return numbers;
+        }
+
+        int[] reversed = new int[numbers.length];
+        int length = numbers.length;
+        for (int number : numbers) {
+            reversed[--length] = number;
         }
         return reversed;
     }
@@ -163,7 +168,7 @@ class Arrays {
         return shortestWordIndex;
     }
 
-    public static int[] generateRandomArray(int startRange, int endRange, int itemsPerLine) {
+    public static int[] generateSortedUniqueRandomArray(int startRange, int endRange, int itemsPerLine) {
         int range = endRange - startRange + 1;
 
         if (startRange > endRange || itemsPerLine < 1 || (int) (range * 0.75) <= 0) {
@@ -189,6 +194,6 @@ class Arrays {
             }
         }
         java.util.Arrays.sort(uniqueNumbers);
-        return java.util.Arrays.copyOf(uniqueNumbers, uniqueCount);
+        return uniqueNumbers;
     }
 }
