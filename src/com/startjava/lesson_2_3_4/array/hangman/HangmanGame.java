@@ -2,6 +2,7 @@ package com.startjava.lesson_2_3_4.array.hangman;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class HangmanGame {
     public final int MAX_ATTEMPTS = 6;
@@ -31,6 +32,26 @@ public class HangmanGame {
         wrongAttempts = 0;
         wrongLetters = new char[20];
         totalAttempts = 0;
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        chooseSecretWord();
+        while (MAX_ATTEMPTS > wrongAttempts && !isGameOver) {
+            System.out.println("Загаданное слово: " + Arrays.toString(maskedWord));
+            if (wrongAttempts > 0) {
+                printIncorrectLetters();
+                System.out.println();
+            }
+            System.out.println("Назовите одну из букв угадываемого слова: ");
+            char letter = scanner.next().charAt(0);
+            if (!isValidInput(letter)) {
+                System.out.println(RED + "Ошибка: Буква уже вводилась ранее или не " +
+                        "является кириллической.Попробуйте снова." + RESET);
+                continue;
+            }
+            tryGuessLetter(letter);
+        }
     }
 
     public String chooseSecretWord() {
