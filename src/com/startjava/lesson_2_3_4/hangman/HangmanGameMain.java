@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class HangmanGameMain {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         String userChoice = "";
         do {
             if (userChoice.equals("yes")) {
@@ -22,7 +23,6 @@ public class HangmanGameMain {
                     У Вас 6 попыток.
                     """);
 
-            Scanner scanner = new Scanner(System.in);
             HangmanGame game = new HangmanGame();
             game.run();
 

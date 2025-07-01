@@ -5,12 +5,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HangmanGame {
-    public final int MAX_ATTEMPTS = 6;
-    public final String RED = "\u001B[31m";
-    public final String GREEN = "\u001B[32m";
-    public final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String RESET = "\u001B[0m";
+    public static final String TROPHY_EMOJI = "\uD83C\uDFC6";
 
-    private final String[] words = {"компьютер", "программа", "машина", "школа", "самолет", "поезд", "город"};
     private String guessedWord;
     private int wrongLettersIndex;
     public char[] maskedWord;
@@ -18,8 +17,9 @@ public class HangmanGame {
     public int wrongAttempts;
     private int totalAttempts;
     public boolean isGameOver;
+    public int maxAttempts = gallows.length;
 
-    private String[] gallowsAllElements = {
+    private static String[] gallows = {
             "_______",
             "|     |",
             "|     @",
@@ -29,41 +29,55 @@ public class HangmanGame {
     };
 
     public HangmanGame() {
-        wrongAttempts = 0;
-        wrongLetters = new char[20];
-        totalAttempts = 0;
+        Random random = new Random();
+        String[] secretWords = {
+                "компьютер",
+                "программа",
+                "машина",
+                "школа",
+                "самолет",
+                "поезд",
+                "город"
+        };
+        guessedWord = secretWords[random.nextInt(secretWords.length)];
+        wrongLetters = new char[guessedWord.length() + maxAttempts - 1];
+        maskedWord = new char[guessedWord.length()];
+        Arrays.fill(maskedWord, '*');
     }
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        chooseSecretWord();
-        while (MAX_ATTEMPTS > wrongAttempts && !isGameOver) {
-            System.out.println("Загаданное слово: " + Arrays.toString(maskedWord));
+        while (maxAttempts > wrongAttempts && !isGameOver) {
+            System.out.print("Загаданное слово: ");
+            printMaskedWord();
+
             if (wrongAttempts > 0) {
                 printIncorrectLetters();
                 System.out.println();
             }
-            System.out.println("Назовите одну из букв угадываемого слова: ");
+            System.out.print("Введите букву: ");
             char letter = scanner.next().charAt(0);
+            if (Character.isDigit(letter)) {
+                System.out.println(RED + "Ошибка: Необходимо ввести именно букву, а не цифру. " +
+                        "Попробуйте снова." + RESET);
+                continue;
+            }
             if (!isValidInput(letter)) {
-                System.out.println(RED + "Ошибка: Буква уже вводилась ранее или не " +
-                        "является кириллической.Попробуйте снова." + RESET);
+                System.out.println(RED + "Ошибка: Буква не является кириллической. " +
+                        "Попробуйте снова." + RESET);
+                continue;
+            }
+            if (letterIsAlreadyUsed(letter)) {
+                System.out.println(RED + "Ошибка: Буква уже вводилась ранее. " +
+                        "Попробуйте снова." + RESET);
                 continue;
             }
             tryGuessLetter(letter);
         }
     }
 
-    public String chooseSecretWord() {
-        Random random = new Random();
-        String secretWord = words[random.nextInt(words.length)];
-        guessedWord = secretWord;
-        initializeCurrentState();
-        return secretWord;
-    }
-
     public boolean isValidInput(char letter) {
-        return String.valueOf(letter).matches("[а-яА-Я]") && !isAlreadyUsed(letter);
+        return String.valueOf(letter).matches("[а-яА-Я]");
     }
 
     public void tryGuessLetter(char letter) {
@@ -75,7 +89,7 @@ public class HangmanGame {
                 wrongAttempts--;
             }
             System.out.println(GREEN + "Вы ввели верную букву." + RESET + "\n");
-
+            printGallows();
             isGameOver = checkVictoryCondition();
             countingAttemptsNumber();
         } else {
@@ -92,19 +106,14 @@ public class HangmanGame {
 
     public void printIncorrectLetters() {
         if (wrongLettersIndex == 0) return;
-        System.out.print("Перечень неверно введенных букв: ");
+        System.out.print("Неверные буквы: ");
         for (int i = 0; i < wrongLettersIndex; i++) {
             System.out.print(wrongLetters[i] + " ");
         }
         System.out.println();
     }
 
-    private void initializeCurrentState() {
-        maskedWord = new char[guessedWord.length()];
-        Arrays.fill(maskedWord, '*');
-    }
-
-    private boolean isAlreadyUsed(char letter) {
+    private boolean letterIsAlreadyUsed(char letter) {
         for (char guessedLetter : maskedWord) {
             if (Character.toLowerCase(guessedLetter) == Character.toLowerCase(letter)) {
                 return true;
@@ -135,21 +144,28 @@ public class HangmanGame {
                 return false;
             }
         }
-        System.out.println(GREEN + "Это победа\nЗагаданное слово: " +
-                Arrays.toString(maskedWord) + RESET + "\n");
+        System.out.println(GREEN + "Это победа " + RESET + TROPHY_EMOJI + "\nЗагаданное слово: ");
+        printMaskedWord();
         return true;
+    }
+
+    private void printMaskedWord() {
+        for (char item : maskedWord) {
+            System.out.print(item);
+        }
+        System.out.println();
     }
 
     private void printGallows() {
         for (int i = 0; i < wrongAttempts; i++) {
-            System.out.println(gallowsAllElements[i]);
+            System.out.println(gallows[i]);
         }
     }
 
     private boolean checkLoseCondition() {
-        if (wrongAttempts >= MAX_ATTEMPTS) {
-            System.out.println(RED + "Это проигрыш.\nЗагаданное слово: " +
-                    guessedWord + RESET + "\n");
+        if (wrongAttempts >= maxAttempts) {
+            System.out.println(RED + "Это проигрыш." + RESET + "\nЗагаданное слово: " +
+                    guessedWord + "\n");
             return true;
         }
         return false;
@@ -158,7 +174,7 @@ public class HangmanGame {
     private void countingAttemptsNumber() {
         if (!isGameOver) {
             System.out.printf("У Вас%s: %d попыток\n",
-                    wrongAttempts > 0 ? " осталось" : "", MAX_ATTEMPTS - wrongAttempts);
+                    wrongAttempts > 0 ? " осталось" : "", maxAttempts - wrongAttempts);
         }
     }
 }
