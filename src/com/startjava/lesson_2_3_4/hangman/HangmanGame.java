@@ -1,4 +1,4 @@
-package com.startjava.lesson_2_3_4.array.hangman;
+package com.startjava.lesson_2_3_4.hangman;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -12,13 +12,12 @@ public class HangmanGame {
 
     private String guessedWord;
     private int wrongLettersIndex;
-    public char[] maskedWord;
+    private char[] maskedWord;
     private char[] wrongLetters;
-    public int wrongAttempts;
+    private int wrongAttempts;
     private int totalAttempts;
-    public boolean isGameOver;
-    public int maxAttempts = gallows.length;
-
+    private boolean isGameOver;
+    private int maxAttempts = gallows.length;
     private static String[] gallows = {
             "_______",
             "|     |",
@@ -39,7 +38,7 @@ public class HangmanGame {
                 "поезд",
                 "город"
         };
-        guessedWord = secretWords[random.nextInt(secretWords.length)];
+        guessedWord = secretWords[random.nextInt(secretWords.length)].toUpperCase();
         wrongLetters = new char[guessedWord.length() + maxAttempts - 1];
         maskedWord = new char[guessedWord.length()];
         Arrays.fill(maskedWord, '*');
@@ -52,22 +51,38 @@ public class HangmanGame {
             printMaskedWord();
 
             if (wrongAttempts > 0) {
-                printIncorrectLetters();
+                printWrongLetters();
                 System.out.println();
             }
+
             System.out.print("Введите букву: ");
-            char letter = scanner.next().charAt(0);
+            char letter = scanner.next().toUpperCase().charAt(0);
+            printWrongLetters();
             if (Character.isDigit(letter)) {
                 System.out.println(RED + "Ошибка: Необходимо ввести именно букву, а не цифру. " +
                         "Попробуйте снова." + RESET);
                 continue;
             }
-            if (!isValidInput(letter)) {
+            if (!String.valueOf(letter).matches("[а-яА-Я]")) {
                 System.out.println(RED + "Ошибка: Буква не является кириллической. " +
                         "Попробуйте снова." + RESET);
                 continue;
             }
-            if (letterIsAlreadyUsed(letter)) {
+
+            boolean isLetterAlreadyUsed = false;
+            for (char guessedLetter : maskedWord) {
+                if (guessedLetter == letter) {
+                    isLetterAlreadyUsed = true;
+                    break;
+                }
+            }
+            for (int i = 0; i < wrongLettersIndex; i++) {
+                if (wrongLetters[i] == letter) {
+                    isLetterAlreadyUsed = true;
+                    break;
+                }
+            }
+            if (isLetterAlreadyUsed) {
                 System.out.println(RED + "Ошибка: Буква уже вводилась ранее. " +
                         "Попробуйте снова." + RESET);
                 continue;
@@ -76,8 +91,20 @@ public class HangmanGame {
         }
     }
 
-    public boolean isValidInput(char letter) {
-        return String.valueOf(letter).matches("[а-яА-Я]");
+    public void printWrongLetters() {
+        if (wrongLettersIndex == 0) return;
+        System.out.print("Неверные буквы: ");
+        for (int i = 0; i < wrongLettersIndex; i++) {
+            System.out.print(wrongLetters[i] + " ");
+        }
+        System.out.println();
+    }
+
+    private void printMaskedWord() {
+        for (char item : maskedWord) {
+            System.out.print(item);
+        }
+        System.out.println();
     }
 
     public void tryGuessLetter(char letter) {
@@ -91,7 +118,7 @@ public class HangmanGame {
             System.out.println(GREEN + "Вы ввели верную букву." + RESET + "\n");
             printGallows();
             isGameOver = checkVictoryCondition();
-            countingAttemptsNumber();
+            printAttemptsNumber();
         } else {
             System.out.println(RED + "Вы ввели НЕ верную букву" + RESET + "\n");
             wrongAttempts++;
@@ -99,32 +126,9 @@ public class HangmanGame {
             printGallows();
             System.out.println();
             isGameOver = checkLoseCondition();
-            countingAttemptsNumber();
+            printAttemptsNumber();
         }
         totalAttempts++;
-    }
-
-    public void printIncorrectLetters() {
-        if (wrongLettersIndex == 0) return;
-        System.out.print("Неверные буквы: ");
-        for (int i = 0; i < wrongLettersIndex; i++) {
-            System.out.print(wrongLetters[i] + " ");
-        }
-        System.out.println();
-    }
-
-    private boolean letterIsAlreadyUsed(char letter) {
-        for (char guessedLetter : maskedWord) {
-            if (Character.toLowerCase(guessedLetter) == Character.toLowerCase(letter)) {
-                return true;
-            }
-        }
-        for (int i = 0; i < wrongLettersIndex; i++) {
-            if (Character.toLowerCase(wrongLetters[i]) == Character.toLowerCase(letter)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean checkGuess(char[] word, char letter) {
@@ -139,21 +143,12 @@ public class HangmanGame {
     }
 
     private boolean checkVictoryCondition() {
-        for (char c : maskedWord) {
-            if (c == '*') {
-                return false;
-            }
+        if ((new String(maskedWord)).equals(guessedWord)) {
+            System.out.println(GREEN + "Это победа " + RESET + TROPHY_EMOJI + "\nЗагаданное слово: ");
+            printMaskedWord();
+            return true;
         }
-        System.out.println(GREEN + "Это победа " + RESET + TROPHY_EMOJI + "\nЗагаданное слово: ");
-        printMaskedWord();
-        return true;
-    }
-
-    private void printMaskedWord() {
-        for (char item : maskedWord) {
-            System.out.print(item);
-        }
-        System.out.println();
+        return false;
     }
 
     private void printGallows() {
@@ -171,7 +166,7 @@ public class HangmanGame {
         return false;
     }
 
-    private void countingAttemptsNumber() {
+    private void printAttemptsNumber() {
         if (!isGameOver) {
             System.out.printf("У Вас%s: %d попыток\n",
                     wrongAttempts > 0 ? " осталось" : "", maxAttempts - wrongAttempts);
