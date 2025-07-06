@@ -7,14 +7,6 @@ public class Calculator {
     private double secondOperand;
     private char sign;
 
-    public double getFirstOperand() {
-        return firstOperand;
-    }
-
-    public double getSecondOperand() {
-        return secondOperand;
-    }
-
     public void setSign(char sign) {
         switch (sign) {
             case '+', '-', '*', '/', '^', '%':
@@ -26,33 +18,19 @@ public class Calculator {
         }
     }
 
-    public char getSign() {
-        return sign;
-    }
+    public double calculate(String expression) {
+        String[] parts = expression.split(" ");
+        firstOperand = isValidateOperand(parts[0]);
+        secondOperand = isValidateOperand(parts[2]);
+        setSign(parts[1].charAt(0));
 
-    private double isValidateOperand(String operand) {
-        try {
-            return Integer.parseInt(operand);
-        } catch (NumberFormatException e) {
-            return NaN;
-        }
-    }
-
-    public void inputException(String input) {
-        String[] expression = input.split(" ");
-        firstOperand = isValidateOperand(expression[0]);
-        secondOperand = isValidateOperand(expression[2]);
-        setSign(expression[1].charAt(0));
-    }
-
-    public double calculate() {
         return switch (sign) {
             case '+' -> firstOperand + secondOperand;
             case '-' -> firstOperand - secondOperand;
             case '*' -> firstOperand * secondOperand;
             case '/' -> {
                 if (secondOperand == 0) {
-                    throw new ArithmeticException();
+                    throw new ArithmeticException("Ошибка: деление на ноль запрещено");
                 }
                 yield firstOperand / secondOperand;
             }
@@ -67,5 +45,13 @@ public class Calculator {
             }
             default -> 0;
         };
+    }
+
+    private double isValidateOperand(String operand) {
+        try {
+            return Integer.parseInt(operand);
+        } catch (NumberFormatException e) {
+            return NaN;
+        }
     }
 }

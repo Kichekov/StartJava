@@ -1,6 +1,6 @@
 package com.startjava.lesson_2_3_4.calculator;
 
-import java.util.Locale;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 class CalculatorTest {
@@ -14,15 +14,12 @@ class CalculatorTest {
             }
             try {
                 System.out.println("Введите выражение из трех аргументов, например, 2 ^ 10:");
-                String input = scanner.nextLine();
-                calc.inputException(input);
+                String expression = scanner.nextLine();
 
-                double calculationResult = calc.calculate();
-                printResult(calc, calculationResult);
-            } catch (IllegalArgumentException e) {
+                double calculationResult = calc.calculate(expression);
+                printResult(expression, calculationResult);
+            } catch (IllegalArgumentException | ArithmeticException e) {
                 System.out.println(e.getMessage());
-            } catch (ArithmeticException ex) {
-                System.out.println("Ошибка: деление на ноль запрещено");
             }
 
             do {
@@ -32,22 +29,14 @@ class CalculatorTest {
         } while (continueCalculation.equals("yes"));
     }
 
-    private static void printResult(Calculator calc, double calculationResult) {
+    private static void printResult(String expression, double calculationResult) {
         if (Double.isNaN(calculationResult)) {
             System.out.println("Один из операндов не является целым числом");
             return;
         }
-        int firstOperand = (int) calc.getFirstOperand();
-        int secondOperand = (int) calc.getSecondOperand();
-        char sign = calc.getSign();
 
-        if (calculationResult % 1 == 0) {
-            System.out.printf("%d %c %d = %d%n", firstOperand, sign, secondOperand, (int) calculationResult);
-        } else {
-            String formattedResult = String.format(Locale.US, "%.3f", calculationResult)
-                    .replaceAll("0+$", "")
-                    .replaceAll("\\.$", "");
-            System.out.printf("%d %c %d = %s%n", firstOperand, sign, secondOperand, formattedResult);
-        }
+        DecimalFormat df = new DecimalFormat("#.###");
+        String formattedResult = df.format(calculationResult);
+        System.out.printf("%s = %s\n", expression, formattedResult);
     }
 }
