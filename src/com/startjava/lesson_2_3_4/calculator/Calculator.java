@@ -3,26 +3,11 @@ package com.startjava.lesson_2_3_4.calculator;
 import static java.lang.Double.NaN;
 
 public class Calculator {
-    private double firstOperand;
-    private double secondOperand;
-    private char sign;
-
-    public void setSign(char sign) {
-        switch (sign) {
-            case '+', '-', '*', '/', '^', '%':
-                this.sign = sign;
-                break;
-            default:
-                throw new IllegalArgumentException("Ошибка: операция " + sign +
-                        " не поддерживается");
-        }
-    }
-
     public double calculate(String expression) {
         String[] parts = expression.split(" ");
-        firstOperand = isValidateOperand(parts[0]);
-        secondOperand = isValidateOperand(parts[2]);
-        setSign(parts[1].charAt(0));
+        double firstOperand = validateOperand(parts[0]);
+        double secondOperand = validateOperand(parts[2]);
+        char sign = parts[1].charAt(0);
 
         return switch (sign) {
             case '+' -> firstOperand + secondOperand;
@@ -43,11 +28,12 @@ public class Calculator {
                 }
                 yield Math.pow(firstOperand, secondOperand);
             }
-            default -> 0;
+            default -> throw new IllegalArgumentException("Ошибка: операция " + sign +
+                    " не поддерживается");
         };
     }
 
-    private double isValidateOperand(String operand) {
+    private double validateOperand(String operand) {
         try {
             return Integer.parseInt(operand);
         } catch (NumberFormatException e) {
