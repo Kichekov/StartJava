@@ -1,13 +1,15 @@
 package com.startjava.lesson_2_3_4.calculator;
 
-import static java.lang.Double.NaN;
+import java.util.InputMismatchException;
 
 public class Calculator {
-    public double calculate(String expression) {
-        String[] parts = expression.split(" ");
-        double firstOperand = validateOperand(parts[0]);
-        double secondOperand = validateOperand(parts[2]);
-        char sign = parts[1].charAt(0);
+    public static final int MAX_EXPRESSION_LENGTH = 3;
+
+    public static double calculate(String expression) {
+        String[] parts = validateExpressionLength(expression);
+        int firstOperand = validateOperand(parts[0]);
+        int secondOperand = validateOperand(parts[2]);
+        char sign = validateSign(parts[1]);
 
         return switch (sign) {
             case '+' -> firstOperand + secondOperand;
@@ -17,7 +19,7 @@ public class Calculator {
                 if (secondOperand == 0) {
                     throw new ArithmeticException("Ошибка: деление на ноль запрещено");
                 }
-                yield firstOperand / secondOperand;
+                yield (double) firstOperand / secondOperand;
             }
             case '%' -> Math.IEEEremainder(firstOperand, secondOperand);
             case '^' -> {
@@ -28,16 +30,39 @@ public class Calculator {
                 }
                 yield Math.pow(firstOperand, secondOperand);
             }
-            default -> throw new IllegalArgumentException("Ошибка: операция " + sign +
+            default -> throw new UnsupportedOperationException("Ошибка: операция " + sign +
                     " не поддерживается");
         };
     }
 
-    private double validateOperand(String operand) {
+    private static String[] validateExpressionLength(String expression) {
+        String[] parts = expression.split(" ");
+        if (parts.length != MAX_EXPRESSION_LENGTH) {
+            throw new InputMismatchException("Ошибка: выражение должно содержать ровно 3 элемента " +
+                    "(операнд, оператор, операнд)");
+        }
+        return parts;
+    }
+
+    private static int validateOperand(String operand) {
         try {
             return Integer.parseInt(operand);
         } catch (NumberFormatException e) {
-            return NaN;
+            throw new NumberFormatException("Операнд " + operand + " не является целым числом");
         }
+    }
+
+    private static char validateSign(String sign) {
+        if (sign.length() > 1) {
+            throw new UnknownOperatorException(
+                    "Ошибка: оператор должен быть одним из символов + - * / % ^");
+        }
+        return sign.charAt(0);
+    }
+}
+
+class UnknownOperatorException extends RuntimeException {
+    public UnknownOperatorException(String message) {
+        super(message);
     }
 }

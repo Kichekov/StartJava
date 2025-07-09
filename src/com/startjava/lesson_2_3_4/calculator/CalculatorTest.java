@@ -1,12 +1,12 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 import java.text.DecimalFormat;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Calculator calc = new Calculator();
         String continueCalculation = "";
         do {
             if (continueCalculation.equals("yes")) {
@@ -15,10 +15,12 @@ class CalculatorTest {
             try {
                 System.out.println("Введите выражение из трех аргументов, например, 2 ^ 10:");
                 String expression = scanner.nextLine();
+                expression = expression.trim().replaceAll("\\s+", " ");
 
-                double calculationResult = calc.calculate(expression);
+                double calculationResult = Calculator.calculate(expression);
                 printResult(expression, calculationResult);
-            } catch (IllegalArgumentException | ArithmeticException e) {
+            } catch (IllegalArgumentException | ArithmeticException | UnsupportedOperationException |
+                     InputMismatchException | UnknownOperatorException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -30,11 +32,6 @@ class CalculatorTest {
     }
 
     private static void printResult(String expression, double calculationResult) {
-        if (Double.isNaN(calculationResult)) {
-            System.out.println("Один из операндов не является целым числом");
-            return;
-        }
-
         DecimalFormat df = new DecimalFormat("#.###");
         String formattedResult = df.format(calculationResult);
         System.out.printf("%s = %s\n", expression, formattedResult);
