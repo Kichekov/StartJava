@@ -20,7 +20,7 @@ class CalculatorTest {
                 double calculationResult = Calculator.calculate(expression);
                 printResult(expression, calculationResult);
             } catch (IllegalArgumentException | ArithmeticException | UnsupportedOperationException |
-                     InputMismatchException | UnknownOperatorException e) {
+                     InputMismatchException | InvalidExpressionFormatException e) {
                 System.out.println(e.getMessage());
             }
 
