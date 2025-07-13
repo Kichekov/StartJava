@@ -1,5 +1,4 @@
 package com.startjava.lesson_2_3_4.guess;
-
 import java.util.Scanner;
 
 class GuessNumberTest {
@@ -13,7 +12,7 @@ class GuessNumberTest {
                       
                 После каждой неудачной попытки Вы получите подсказку.
                 Игра продолжится до тех пор, пока Вы не отгадаете загаданное
-                компьютером число!
+                компьютером число.
                         """);
 
         System.out.print("Введите имя первого игрока: ");
@@ -25,7 +24,11 @@ class GuessNumberTest {
         GuessNumber game = new GuessNumber(playerOne, playerTwo);
         String continueGame = "";
         do {
-            game.start();
+            try {
+                game.start(scanner);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
             do {
                 System.out.print("Хотите продолжить игру? [yes/no]: ");
                 continueGame = scanner.next();

@@ -12,36 +12,53 @@ public class GuessNumber {
         this.playerTwo = playerTwo;
     }
 
-    public void start() {
-        Scanner scanner = new Scanner(System.in);
+    public void start(Scanner scanner) {
+        System.out.println("Игра началась! У каждого игрока по 10 попыток.");
         assignRandomNumber();
         boolean hasWinner = false;
         do {
-            playerOne.setNumber(inputNumber(playerOne, scanner));
+            inputNumber(playerOne, scanner);
+            playerOne.setTrial();
+
             if (isGuessed(playerOne)) {
                 hasWinner = true;
-                return;
+                break;
             }
+            isLastTrial(playerOne);
             scanner.nextLine();
-            playerTwo.setNumber(inputNumber(playerTwo, scanner));
+
+            inputNumber(playerTwo, scanner);
+            playerTwo.setTrial();
             if (isGuessed(playerTwo)) {
                 hasWinner = true;
-                return;
+                break;
+            }
+            if (isLastTrial(playerTwo)) {
+                break;
             }
         } while (!hasWinner);
+        printTargetNum(playerOne);
+        printTargetNum(playerTwo);
+
+        playerOne.reset();
+        playerTwo.reset();
     }
 
     private void assignRandomNumber() {
         targetNum = (int) (1 + Math.random() * 100);
     }
 
-    private int inputNumber(Player player, Scanner scanner) {
+    private void inputNumber(Player player, Scanner scanner) {
         while (true) {
-            System.out.print(player.getName() + " введи число: ");
+            System.out.print("\nПопытка N" + (player.getTrial() + 1) + "\n" +
+                    "Число вводит " + player.getName() + ": ");
             try {
-                return validateEnteredNumber(scanner);
+                int number = validateEnteredNumber(scanner);
+                player.setNumber(number);
+                return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+                System.out.println("Попробуйте еще раз:");
                 scanner.nextLine();
             }
         }
@@ -49,27 +66,46 @@ public class GuessNumber {
 
     private int validateEnteredNumber(Scanner scanner) {
         if (!scanner.hasNextInt()) {
-            throw new IllegalArgumentException("Ошибка: введенные вами данные" + 
-                " не являются натуральным числом.");
+            throw new IllegalArgumentException("Ошибка: введенные вами данные" +
+                    " не являются натуральным числом.");
         }
         int enteredNumber = scanner.nextInt();
         if (enteredNumber < 1 || enteredNumber > 100) {
-            throw new IllegalArgumentException("Ошибка: введенное Вами число не принадлежит " + 
-                "заданному отрезку, повторите попытку.");
-        } 
+            throw new IllegalArgumentException("Число должно входить в отрезок [1, 100]." +
+                    "\nПопробуйте еще раз.");
+        }
         return enteredNumber;
     }
 
     private boolean isGuessed(Player player) {
         if (targetNum != player.getNumber()) {
-            String message = player.getNumber() > targetNum ? 
+            String message = player.getNumber() > targetNum ?
                     "больше" : "меньше";
-            System.out.printf("%s %d %s того, что загадал компьютер\n", 
+            System.out.printf("%s %d %s того, что загадал компьютер\n",
                     player.getName(), player.getNumber(), message);
             return false;
-        } 
-        System.out.printf("Победа!!! %s угадал число загаданное компьютером\n", player.getName());
+        }
+        System.out.printf("%s угадал число %d с %d-й попытки\n",
+                player.getName(), targetNum, player.getTrial());
         return true;
+    }
+
+    private boolean isLastTrial(Player player) {
+        if (player.getTrial() == Player.MAX_ATTEMPTS) {
+            System.out.printf("У %s закончились попытки!%s\n",
+                    player.getName(), player.equals(playerTwo) ? " Загаданное число: " + targetNum + "\n" : "");
+            return true;
+        }
+        return false;
+    }
+
+    private void printTargetNum(Player player) {
+        System.out.printf("%s ввел числа: ", player.getName());
+
+        for (int number : player.getEnteredNumbers()) {
+            System.out.print(number + " ");
+        }
+        System.out.println();
     }
 }
 
