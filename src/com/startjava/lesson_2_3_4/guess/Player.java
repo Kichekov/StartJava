@@ -3,13 +3,13 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Arrays;
 
 public class Player {
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 100;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 100;
     public static final int MAX_ATTEMPTS = 10;
 
-    private String name;
-    private int[] numbers = new int[MAX_ATTEMPTS];
-    private int trial;
+    private final String name;
+    private final int[] numbers = new int[MAX_ATTEMPTS];
+    private int attempt;
 
     public Player(String name) {
         this.name = name;
@@ -19,31 +19,33 @@ public class Player {
         return name;
     }
 
-    public void setNumber(int number) {
+    public void addNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException("Число должно входить в отрезок [1, 100].");
+            throw new IllegalArgumentException("""
+                    Число должно входить в отрезок [%d, %d].
+                    Попробуйте еще раз.""".formatted(MIN_NUMBER, MAX_NUMBER));
         }
-        numbers[trial] = number;
+        numbers[attempt] = number;
     }
 
     public int getNumber() {
-        return numbers[trial - 1];
+        return numbers[attempt - 1];
     }
 
-    public int getTrial() {
-        return trial;
+    public int getAttempt() {
+        return attempt;
     }
 
-    public void setTrial() {
-        this.trial++;
+    public void setAttempt() {
+        this.attempt++;
     }
 
     public int[] getEnteredNumbers() {
-        return Arrays.copyOf(numbers, trial);
+        return Arrays.copyOf(numbers, attempt);
     }
 
     public void reset() {
-        Arrays.fill(numbers, 0);
-        trial = 0;
+        Arrays.fill(numbers, 0, attempt, 0);
+        attempt = 0;
     }
 }

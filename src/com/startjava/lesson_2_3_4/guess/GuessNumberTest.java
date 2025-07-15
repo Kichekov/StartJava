@@ -1,4 +1,5 @@
 package com.startjava.lesson_2_3_4.guess;
+
 import java.util.Scanner;
 
 class GuessNumberTest {
@@ -9,11 +10,11 @@ class GuessNumberTest {
                 -------------------------------------------
                 Правила игры: Компьютер "загадывает" целое число в отрезке [1-100].
                               Вы должны его отгадать!
-                      
+                
                 После каждой неудачной попытки Вы получите подсказку.
                 Игра продолжится до тех пор, пока Вы не отгадаете загаданное
                 компьютером число.
-                        """);
+                """);
 
         System.out.print("Введите имя первого игрока: ");
         Player playerOne = new Player(scanner.next());
@@ -22,18 +23,14 @@ class GuessNumberTest {
         Player playerTwo = new Player(scanner.next());
 
         GuessNumber game = new GuessNumber(playerOne, playerTwo);
-        String continueGame = "";
+        String replayGame;
         do {
-            try {
-                game.start(scanner);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+            game.start(scanner);
             do {
                 System.out.print("Хотите продолжить игру? [yes/no]: ");
-                continueGame = scanner.next();
-            } while (!continueGame.equals("yes") && !continueGame.equals("no"));
+                replayGame = scanner.next();
+            } while (!replayGame.equals("yes") && !replayGame.equals("no"));
             System.out.println();
-        } while (continueGame.equals("yes"));
+        } while (replayGame.equals("yes"));
     }
 }
