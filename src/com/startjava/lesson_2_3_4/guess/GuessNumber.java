@@ -18,22 +18,22 @@ public class GuessNumber {
         boolean hasWinner = false;
         while (!hasWinner) {
             inputNumber(playerOne, scanner);
-            playerOne.setAttempt();
+            playerOne.incAttempt();
 
             if (isGuessed(playerOne)) {
                 hasWinner = true;
                 continue;
             }
-            isLastTrial(playerOne);
+            hasAttempt(playerOne);
             scanner.nextLine();
 
             inputNumber(playerTwo, scanner);
-            playerTwo.setAttempt();
+            playerTwo.incAttempt();
             if (isGuessed(playerTwo)) {
                 hasWinner = true;
                 continue;
             }
-            if (isLastTrial(playerTwo)) {
+            if (hasAttempt(playerTwo)) {
                 break;
             }
         }
@@ -93,7 +93,7 @@ public class GuessNumber {
         return true;
     }
 
-    private boolean isLastTrial(Player player) {
+    private boolean hasAttempt(Player player) {
         if (player.getAttempt() == Player.MAX_ATTEMPTS) {
             System.out.printf("""
                     У %s закончились попытки!%s

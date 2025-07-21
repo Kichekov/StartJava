@@ -36,7 +36,7 @@ public class Player {
         return attempt;
     }
 
-    public void setAttempt() {
+    public void incAttempt() {
         this.attempt++;
     }
 
