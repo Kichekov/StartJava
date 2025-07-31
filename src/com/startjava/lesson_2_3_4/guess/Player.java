@@ -10,6 +10,7 @@ public class Player {
     private final String name;
     private final int[] numbers = new int[MAX_ATTEMPTS];
     private int attempt;
+    public int victory;
 
     public Player(String name) {
         this.name = name;
@@ -17,6 +18,14 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public int getVictory() {
+        return victory;
+    }
+
+    public void incVictory() {
+        victory++;
     }
 
     public void addNumber(int number) {
